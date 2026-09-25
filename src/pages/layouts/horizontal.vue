@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import BaseTable from '../../components/ui/BaseTable.vue'
 import {
 	IconBuildingStore,
@@ -15,24 +15,43 @@ import {
 	IconBell,
 	IconNotification,
 	IconHelpCircle,
-	IconSettings,
 	IconChevronDown,
 	IconSearch,
 	IconPencil,
 	IconTrash,
 	IconUsers,
-	IconEye
+	IconEye,
+	IconUser,
+	IconLock,
+	IconLogout
 } from '@tabler/icons-vue'
 
 const activeDropdown = ref(null)
+const profileOpen = ref(false)
+const profileDropdownRef = ref(null)
 
 const toggleDropdown = (key) => {
 	activeDropdown.value = activeDropdown.value === key ? null : key
 }
 
-const closeDropdowns = () => {
-	activeDropdown.value = null
+const toggleProfile = () => {
+	profileOpen.value = !profileOpen.value
 }
+
+const closeDropdowns = (e) => {
+	activeDropdown.value = null
+	if (profileDropdownRef.value && !profileDropdownRef.value.contains(e?.target)) {
+		profileOpen.value = false
+	}
+}
+
+onMounted(() => {
+	window.addEventListener('click', closeDropdowns)
+})
+
+onUnmounted(() => {
+	window.removeEventListener('click', closeDropdowns)
+})
 
 const metrics = [
 	{ label: 'Total Revenue', value: '$48,250', change: '+12.5%', isUp: true },
@@ -82,11 +101,38 @@ const products = ref([
 
 					<div class="h-6 w-px bg-slate-200 hidden sm:block mx-1"></div>
 
-					<div class="flex items-center gap-3 pl-1">
-						<img class="avatar avatar-sm ring-2 ring-slate-100 shrink-0" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120" alt="Avatar" />
-						<div class="hidden sm:flex flex-col text-left">
-							<span class="text-xs font-semibold text-slate-800 leading-tight">Administrator</span>
-							<span class="text-[10px] text-slate-400 leading-tight">admin@arunika.io</span>
+					<div class="relative" ref="profileDropdownRef" @click.stop>
+						<button type="button" @click="toggleProfile" class="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-100 transition cursor-pointer select-none text-left" aria-label="User menu">
+							<img class="avatar avatar-sm ring-2 ring-slate-100 shrink-0" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120" alt="Avatar" />
+							<div class="hidden sm:flex flex-col text-left">
+								<span class="text-xs font-semibold text-slate-800">Administrator</span>
+								<span class="text-[10px] text-slate-400">admin@arunika.io</span>
+							</div>
+						</button>
+
+						<div v-if="profileOpen" class="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+							<div class="px-4 py-2.5 border-b border-slate-100">
+								<p class="text-xs font-bold text-slate-900 truncate">Administrator</p>
+								<p class="text-[11px] text-slate-500 truncate">admin@arunika.io</p>
+							</div>
+
+							<div class="py-1">
+								<router-link to="/users" @click="profileOpen = false" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
+									<IconUser :size="16" class="text-slate-400" />
+									<span>Account Profile</span>
+								</router-link>
+								<router-link to="/reset-password" @click="profileOpen = false" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
+									<IconLock :size="16" class="text-slate-400" />
+									<span>Change Password</span>
+								</router-link>
+							</div>
+
+							<div class="pt-1 border-t border-slate-100">
+								<router-link to="/login" @click="profileOpen = false" class="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition">
+									<IconLogout :size="16" />
+									<span>Log Out</span>
+								</router-link>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -174,11 +220,6 @@ const products = ref([
 					<router-link to="/users" class="flex items-center gap-2 px-3.5 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300 transition">
 						<IconUsers :size="18" />
 						<span>Users</span>
-					</router-link>
-
-					<router-link to="/settings" class="flex items-center gap-2 px-3.5 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300 transition">
-						<IconSettings :size="18" />
-						<span>Settings</span>
 					</router-link>
 				</div>
 			</nav>

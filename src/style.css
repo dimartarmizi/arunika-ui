@@ -283,7 +283,7 @@
 	}
 
 	.avatar {
-		@apply rounded-full object-cover shrink-0;
+		@apply rounded-xl object-cover shrink-0;
 	}
 
 	.avatar-sm {
