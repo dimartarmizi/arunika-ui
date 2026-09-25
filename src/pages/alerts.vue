@@ -48,12 +48,7 @@ const resetAlert = () => {
 				<h4 class="font-semibold text-sm text-slate-800">Alerts with Titles & Actions</h4>
 			</div>
 			<div class="card-body flex flex-col gap-4">
-				<BaseAlert
-					v-model="showDismissible"
-					variant="info"
-					title="Information Notice"
-					dismissible
-				>
+				<BaseAlert v-model="showDismissible" variant="info" title="Information Notice" dismissible>
 					This alert can be dismissed by clicking the close button on the right.
 				</BaseAlert>
 

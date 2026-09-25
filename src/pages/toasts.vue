@@ -66,9 +66,9 @@ const removeToast = (id) => {
 							{ label: 'Top Left', val: 'toast-top toast-start' },
 							{ label: 'Bottom Center', val: 'toast-bottom toast-center' }
 						]" :key="pos.val" @click="toastPosition = pos.val" :class="[
-								'btn btn-sm',
-								toastPosition === pos.val ? 'btn-primary' : 'btn-outline'
-							]">
+							'btn btn-sm',
+							toastPosition === pos.val ? 'btn-primary' : 'btn-outline'
+						]">
 							{{ pos.label }}
 						</button>
 					</div>

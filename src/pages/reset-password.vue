@@ -46,13 +46,7 @@ const handleResetPassword = () => {
 			</BaseAlert>
 
 			<form @submit.prevent="handleResetPassword" class="flex flex-col gap-4">
-				<BaseInput
-					v-model="password"
-					:type="showPassword ? 'text' : 'password'"
-					label="New Password"
-					required
-					placeholder="Minimum 8 characters"
-				>
+				<BaseInput v-model="password" :type="showPassword ? 'text' : 'password'" label="New Password" required placeholder="Minimum 8 characters">
 					<template #prefix>
 						<IconLock :size="18" />
 					</template>
@@ -64,13 +58,7 @@ const handleResetPassword = () => {
 					</template>
 				</BaseInput>
 
-				<BaseInput
-					v-model="confirmPassword"
-					:type="showConfirmPassword ? 'text' : 'password'"
-					label="Confirm New Password"
-					required
-					placeholder="Repeat your new password"
-				>
+				<BaseInput v-model="confirmPassword" :type="showConfirmPassword ? 'text' : 'password'" label="Confirm New Password" required placeholder="Repeat your new password">
 					<template #prefix>
 						<IconLock :size="18" />
 					</template>

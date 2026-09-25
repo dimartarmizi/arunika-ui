@@ -105,7 +105,7 @@ const products = ref([
 		</div>
 
 		<div class="card overflow-hidden">
-			<div class="card-header">
+			<div class="card-header">f
 				<div>
 					<h4 class="font-semibold text-sm text-slate-800">Compact & Bordered Variant</h4>
 					<p class="text-xs text-slate-500">Dense density layout with full borders using <code>compact</code> and <code>bordered</code> props</p>
