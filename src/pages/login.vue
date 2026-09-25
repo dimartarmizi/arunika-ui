@@ -60,11 +60,11 @@ const handleLogin = () => {
 					<BaseCheckbox v-model="loginForm.remember" label="Remember me" />
 				</div>
 
-				<button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+				<button type="submit" class="btn btn-primary btn-lg w-full">
 					Sign In Now
 				</button>
 
-				<p class="text-center text-xs text-slate-500 mt-6">
+				<p class="text-center text-xs text-slate-500">
 					Don't have an account?
 					<router-link to="/register" class="font-semibold text-blue-600 hover:text-blue-700 ml-1">
 						Sign up here

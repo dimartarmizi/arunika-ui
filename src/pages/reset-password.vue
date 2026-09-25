@@ -70,11 +70,11 @@ const handleResetPassword = () => {
 					</template>
 				</BaseInput>
 
-				<button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+				<button type="submit" class="btn btn-primary btn-lg w-full">
 					Reset Password
 				</button>
 
-				<div class="flex items-center justify-center gap-1.5 mt-4">
+				<div class="flex items-center justify-center gap-1.5">
 					<router-link to="/login" class="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-blue-600 transition">
 						<IconArrowLeft :size="14" />
 						<span>Back to Sign In</span>

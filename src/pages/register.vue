@@ -74,11 +74,11 @@ const handleRegister = () => {
 					<BaseCheckbox v-model="registerForm.agree" label="I agree to the Terms of Service & Privacy Policy" required />
 				</div>
 
-				<button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+				<button type="submit" class="btn btn-primary btn-lg w-full">
 					Create Account
 				</button>
 
-				<p class="text-center text-xs text-slate-500 mt-6">
+				<p class="text-center text-xs text-slate-500">
 					Already have an account?
 					<router-link to="/login" class="font-semibold text-blue-600 hover:text-blue-700 ml-1">
 						Sign in here
