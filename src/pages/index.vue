@@ -41,7 +41,7 @@ const orders = ref([
 				<p class="text-blue-100 text-sm mt-1">Here is a summary of your store's performance and activity today.</p>
 			</div>
 			<div class="flex items-center gap-2">
-				<button class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold rounded-xl backdrop-blur-xs transition">
+				<button class="btn bg-white/10 hover:bg-white/20 text-white backdrop-blur-xs">
 					<IconDownload :size="16" />
 					Download Report
 				</button>
@@ -52,8 +52,8 @@ const orders = ref([
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-			<div v-for="(st, index) in stats" :key="index" class="card p-5">
+		<section aria-label="Dashboard statistics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+			<article v-for="(st, index) in stats" :key="index" class="card p-5">
 				<div class="flex items-center justify-between">
 					<span class="stat-title">{{ st.title }}</span>
 					<div class="icon-box icon-box-md icon-box-neutral">
@@ -71,8 +71,8 @@ const orders = ref([
 						{{ st.change }}
 					</span>
 				</div>
-			</div>
-		</div>
+			</article>
+		</section>
 
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 			<div class="lg:col-span-2 card overflow-hidden">

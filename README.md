@@ -96,6 +96,7 @@ npm run preview
 | Route | Description |
 |---|---|
 | `/` | Dashboard metrics, charts placeholder, recent transactions |
+| `/layouts` | Layout variations hub (Default Vertical, Horizontal, Horizontal Condensed, Boxed) |
 | `/users` | User management table with search, filters, actions |
 | `/form-elements` | Form controls showcase + interactive validation state tester |
 | `/tables` | Simple, striped, bordered, and compact data tables |
