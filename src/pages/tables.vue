@@ -13,19 +13,24 @@ const columns = [
 ]
 
 const products = ref([
-	{ id: 1, product: 'Wireless Noise-Canceling Headphones', category: 'Audio', stock: 45, price: '$299.00', status: 'In Stock' },
-	{ id: 2, product: 'Ergonomic Mechanical Keyboard', category: 'Peripherals', stock: 12, price: '$149.00', status: 'Low Stock' },
-	{ id: 3, product: 'Ultra-Wide Curved Gaming Monitor', category: 'Displays', stock: 0, price: '$699.00', status: 'Out of Stock' },
-	{ id: 4, product: 'Thunderbolt 4 Docking Station', category: 'Accessories', stock: 88, price: '$199.00', status: 'In Stock' },
-	{ id: 5, product: 'Smart RGB Desk Lamp Pro', category: 'Lighting', stock: 24, price: '$79.00', status: 'In Stock' }
+	{ id: 1, product: 'Wireless Noise-Canceling Headphones', category: 'Audio', stock: 45, price: 299.00, status: 'In Stock' },
+	{ id: 2, product: 'Ergonomic Mechanical Keyboard', category: 'Peripherals', stock: 12, price: 149.00, status: 'Low Stock' },
+	{ id: 3, product: 'Ultra-Wide Curved Gaming Monitor', category: 'Displays', stock: 0, price: 699.00, status: 'Out of Stock' },
+	{ id: 4, product: 'Thunderbolt 4 Docking Station', category: 'Accessories', stock: 88, price: 199.00, status: 'In Stock' },
+	{ id: 5, product: 'Smart RGB Desk Lamp Pro', category: 'Lighting', stock: 24, price: 79.00, status: 'In Stock' }
 ])
 </script>
 
 <template>
 	<div class="flex flex-col gap-6">
-		<div>
-			<h3 class="text-xl font-bold text-slate-900">Tables</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Reusable data table component with striped, compact, and bordered variants.</p>
+		<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+			<div>
+				<h3 class="text-xl font-bold text-slate-900">Tables</h3>
+				<p class="text-xs sm:text-sm text-slate-500">Standard, striped, and compact table variants using BaseTable.</p>
+			</div>
+			<router-link to="/advanced-table" class="btn btn-outline btn-sm self-start sm:self-auto">
+				Go to Advanced Table &rarr;
+			</router-link>
 		</div>
 
 		<div class="card overflow-hidden">
@@ -49,7 +54,7 @@ const products = ref([
 				</template>
 
 				<template #cell(price)="{ value }">
-					<span class="text-xs sm:text-sm font-semibold text-slate-900">{{ value }}</span>
+					<span class="text-xs sm:text-sm font-semibold text-slate-900">${{ Number(value).toFixed(2) }}</span>
 				</template>
 
 				<template #cell(status)="{ value }">
@@ -90,7 +95,7 @@ const products = ref([
 					<span class="font-medium text-slate-900 text-xs sm:text-sm">{{ value }}</span>
 				</template>
 				<template #cell(price)="{ value }">
-					<span class="font-semibold text-slate-900 text-xs sm:text-sm">{{ value }}</span>
+					<span class="font-semibold text-slate-900 text-xs sm:text-sm">${{ Number(value).toFixed(2) }}</span>
 				</template>
 				<template #cell(status)="{ value }">
 					<span :class="[
@@ -105,7 +110,7 @@ const products = ref([
 		</div>
 
 		<div class="card overflow-hidden">
-			<div class="card-header">f
+			<div class="card-header">
 				<div>
 					<h4 class="font-semibold text-sm text-slate-800">Compact & Bordered Variant</h4>
 					<p class="text-xs text-slate-500">Dense density layout with full borders using <code>compact</code> and <code>bordered</code> props</p>

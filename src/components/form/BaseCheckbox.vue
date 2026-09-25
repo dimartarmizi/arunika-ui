@@ -10,6 +10,10 @@ const props = defineProps({
 		type: [String, Number, Boolean],
 		default: true
 	},
+	indeterminate: {
+		type: Boolean,
+		default: false
+	},
 	label: {
 		type: String,
 		default: ''
@@ -28,7 +32,7 @@ const props = defineProps({
 	}
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 const isChecked = computed(() => {
 	if (Array.isArray(props.modelValue)) {
@@ -51,6 +55,7 @@ const handleChange = (e) => {
 	} else {
 		emit('update:modelValue', e.target.checked)
 	}
+	emit('change', e)
 }
 </script>
 
@@ -58,11 +63,14 @@ const handleChange = (e) => {
 	<div>
 		<label :class="['inline-flex items-center gap-2 select-none', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer']">
 			<div class="relative flex items-center justify-center">
-				<input type="checkbox" :checked="isChecked" :disabled="disabled" @change="handleChange" v-bind="$attrs" :class="[
-					'peer appearance-none w-5 h-5 border-2 rounded-lg bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition cursor-pointer',
+				<input type="checkbox" :checked="isChecked" :indeterminate.prop="indeterminate" :disabled="disabled" @change="handleChange" v-bind="$attrs" :class="[
+					'peer appearance-none w-5 h-5 border-2 rounded-lg bg-white checked:bg-blue-600 checked:border-blue-600 indeterminate:bg-blue-600 indeterminate:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition cursor-pointer',
 					error ? 'border-rose-400' : 'border-slate-300'
 				]" />
-				<svg class="absolute w-3 h-3 text-white pointer-events-none hidden peer-checked:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+				<svg v-if="indeterminate" class="absolute w-3 h-3 text-white pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="5" y1="12" x2="19" y2="12"></line>
+				</svg>
+				<svg v-else class="absolute w-3 h-3 text-white pointer-events-none hidden peer-checked:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
 					<polyline points="20 6 9 17 4 12"></polyline>
 				</svg>
 			</div>

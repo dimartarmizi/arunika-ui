@@ -137,7 +137,7 @@ onUnmounted(() => {
 				</div>
 			</button>
 
-			<div v-if="isOpen" class="absolute z-20 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-200/50 py-1.5 overflow-hidden">
+			<div v-if="isOpen" class="absolute z-30 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-200/50 py-1.5 overflow-hidden">
 				<div v-for="opt in normalizedOptions" :key="opt.value" @click="selectOption(opt)" :class="[
 					'flex items-center justify-between px-3.5 py-2 text-sm cursor-pointer transition select-none',
 					selectedOption?.value === opt.value

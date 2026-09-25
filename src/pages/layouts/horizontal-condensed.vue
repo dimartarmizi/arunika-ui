@@ -11,7 +11,8 @@ import {
 	IconClick,
 	IconFolders,
 	IconLayoutList,
-	IconWindow,
+	IconComponents,
+	IconAppWindow,
 	IconBell,
 	IconSearch,
 	IconNotification,
@@ -86,7 +87,7 @@ const products = ref([
 									: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
 							]">
 								<IconForms :size="18" />
-								<span>Forms & Data</span>
+								<span>Forms & Tables</span>
 								<IconChevronDown :size="16" :class="['transition-transform duration-200', activeDropdown === 'forms' ? 'rotate-180' : '']" />
 							</button>
 
@@ -109,7 +110,7 @@ const products = ref([
 									? 'bg-slate-100 text-slate-900'
 									: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
 							]">
-								<IconWindow :size="18" />
+								<IconComponents :size="18" />
 								<span>UI Components</span>
 								<IconChevronDown :size="16" :class="['transition-transform duration-200', activeDropdown === 'components' ? 'rotate-180' : '']" />
 							</button>
@@ -132,7 +133,7 @@ const products = ref([
 									<span>Buttons</span>
 								</router-link>
 								<router-link to="/modals" @click="closeDropdowns" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-normal text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition">
-									<IconWindow :size="18" class="text-slate-400" />
+									<IconAppWindow :size="18" class="text-slate-400" />
 									<span>Modals</span>
 								</router-link>
 								<router-link to="/tabs" @click="closeDropdowns" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-normal text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition">

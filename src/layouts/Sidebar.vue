@@ -8,7 +8,7 @@ import {
 	IconX,
 	IconBuildingStore,
 	IconForms,
-	IconWindow,
+	IconAppWindow,
 	IconBell,
 	IconHelpCircle,
 	IconLogin,
@@ -16,6 +16,7 @@ import {
 	IconKey,
 	IconLock,
 	IconTable,
+	IconTableSpark,
 	IconNotification,
 	IconClick,
 	IconFolders,
@@ -62,7 +63,8 @@ const menuSections = [
 		title: 'Forms & Tables',
 		items: [
 			{ to: '/form-elements', label: 'Form Elements', icon: IconForms },
-			{ to: '/tables', label: 'Tables', icon: IconTable }
+			{ to: '/tables', label: 'Tables', icon: IconTable },
+			{ to: '/advanced-table', label: 'Advanced Table', icon: IconTableSpark }
 		]
 	},
 	{
@@ -72,7 +74,7 @@ const menuSections = [
 			{ to: '/alerts', label: 'Alerts', icon: IconBell },
 			{ to: '/badges', label: 'Badges', icon: IconBadge },
 			{ to: '/buttons', label: 'Buttons', icon: IconClick },
-			{ to: '/modals', label: 'Modals', icon: IconWindow },
+			{ to: '/modals', label: 'Modals', icon: IconAppWindow },
 			{ to: '/tabs', label: 'Tabs', icon: IconFolders },
 			{ to: '/toasts', label: 'Toasts', icon: IconNotification },
 			{ to: '/tooltips', label: 'Tooltips', icon: IconHelpCircle }
