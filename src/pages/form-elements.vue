@@ -37,6 +37,72 @@ const options = [
 	{ value: '3', label: 'Option 3' }
 ]
 
+// Advanced Select Demo States
+const selectedFramework = ref('vue')
+const frameworkOptions = [
+	{ value: 'vue', label: 'Vue.js', icon: '💚', desc: 'Progressive Framework' },
+	{ value: 'react', label: 'React', icon: '⚛️', desc: 'UI Library' },
+	{ value: 'svelte', label: 'Svelte', icon: '🔥', desc: 'Cybernetically enhanced' },
+	{ value: 'angular', label: 'Angular', icon: '🅰️', desc: 'Platform framework' }
+]
+
+const multiTags = ref(['design', 'dev'])
+const tagOptions = ref([
+	{ value: 'design', label: 'UI/UX Design' },
+	{ value: 'dev', label: 'Frontend Dev' },
+	{ value: 'backend', label: 'Backend API' },
+	{ value: 'devops', label: 'Cloud & DevOps' }
+])
+
+const selectedProvince = ref('')
+const selectedCity = ref('')
+const provinces = [
+	{ value: 'west-coast', label: 'West Coast' },
+	{ value: 'east-coast', label: 'East Coast' },
+	{ value: 'central', label: 'Central' }
+]
+const cityMap = {
+	'west-coast': [
+		{ value: 'sf', label: 'San Francisco' },
+		{ value: 'la', label: 'Los Angeles' },
+		{ value: 'sea', label: 'Seattle' }
+	],
+	'east-coast': [
+		{ value: 'nyc', label: 'New York' },
+		{ value: 'bos', label: 'Boston' },
+		{ value: 'mia', label: 'Miami' }
+	],
+	central: [
+		{ value: 'chi', label: 'Chicago' },
+		{ value: 'aus', label: 'Austin' },
+		{ value: 'den', label: 'Denver' }
+	]
+}
+const currentCities = ref([])
+const onProvinceChange = (prov) => {
+	selectedCity.value = ''
+	currentCities.value = prov ? cityMap[prov] || [] : []
+}
+
+// Async + Infinite Scroll Simulator
+const asyncUser = ref(null)
+const loadUsersApi = async (query = '', isAppend = false) => {
+	await new Promise((r) => setTimeout(r, 600))
+	const mockData = [
+		{ value: '1', label: 'Sarah Connor', email: 'sarah@skynet.com' },
+		{ value: '2', label: 'John Doe', email: 'john@example.com' },
+		{ value: '3', label: 'Alex Murphy', email: 'murphy@detroit.gov' },
+		{ value: '4', label: 'Thomas Anderson', email: 'neo@matrix.io' },
+		{ value: '5', label: 'Bruce Wayne', email: 'bruce@wayne.corp' }
+	]
+	if (query) {
+		return mockData.filter((u) =>
+			u.label.toLowerCase().includes(query.toLowerCase())
+		)
+	}
+	return mockData
+}
+
 const testState = ref('normal')
 const testForm = ref({
 	username: 'johndoe',
@@ -56,7 +122,7 @@ const testForm = ref({
 			<div class="card-header flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 				<div>
 					<h4 class="font-semibold text-sm text-foreground">Interactive State Tester</h4>
-					<p class="text-xs text-muted-foreground">Klik tombol state untuk menguji respon visual input secara langsung.</p>
+					<p class="text-xs text-muted-foreground">Click state buttons to test the visual response of the inputs live.</p>
 				</div>
 				<div class="btn-group">
 					<button type="button" @click="testState = 'normal'" :class="['btn btn-sm', testState === 'normal' ? 'btn-primary' : 'btn-outline']">
@@ -77,11 +143,52 @@ const testForm = ref({
 				</div>
 			</div>
 			<div class="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-				<BaseInput v-model="testForm.username" label="Username / Email" placeholder="Enter username" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Username tidak valid atau sudah digunakan.' : false" :success="testState === 'success' ? 'Username valid dan siap digunakan!' : false" :warning="testState === 'warning' ? 'Format username kurang direkomendasikan.' : false" :hint="testState === 'normal' ? 'Gunakan 3-20 karakter alfanumerik.' : ''" />
+				<BaseInput v-model="testForm.username" label="Username / Email" placeholder="Enter username" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Username is invalid or already taken.' : false" :success="testState === 'success' ? 'Username is valid and available!' : false" :warning="testState === 'warning' ? 'Username format is not recommended.' : false" :hint="testState === 'normal' ? 'Use 3-20 alphanumeric characters.' : ''" />
 
-				<BaseSelect v-model="testForm.role" label="User Role" :options="options" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Role wajib dipilih.' : false" :success="testState === 'success' ? 'Role telah berhasil ditentukan.' : false" :warning="testState === 'warning' ? 'Role ini memiliki batasan akses tertentu.' : false" :hint="testState === 'normal' ? 'Pilih tingkat hak akses akun.' : ''" />
+				<BaseSelect v-model="testForm.role" label="User Role" :options="options" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Role selection is required.' : false" :success="testState === 'success' ? 'Role has been successfully set.' : false" :warning="testState === 'warning' ? 'This role has restricted access.' : false" :hint="testState === 'normal' ? 'Select an account access level.' : ''" />
 
-				<BaseDatePicker v-model="testForm.date" label="Activation Date" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Tanggal tidak boleh di masa lampau.' : false" :success="testState === 'success' ? 'Tanggal aktivasi terkonfirmasi.' : false" :warning="testState === 'warning' ? 'Tanggal jatuh pada akhir pekan.' : false" :hint="testState === 'normal' ? 'Pilih tanggal mulai aktif.' : ''" />
+				<BaseDatePicker v-model="testForm.date" label="Activation Date" :required="testState !== 'disabled'" :disabled="testState === 'disabled'" :error="testState === 'error' ? 'Date cannot be in the past.' : false" :success="testState === 'success' ? 'Activation date confirmed.' : false" :warning="testState === 'warning' ? 'Date falls on a weekend.' : false" :hint="testState === 'normal' ? 'Choose when activation begins.' : ''" />
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<div>
+					<h4 class="font-semibold text-sm text-foreground">Advanced Select Showcase</h4>
+					<p class="text-xs text-muted-foreground">Searchable, Multi-select, Creatable, Dependent, Async/API, Custom template</p>
+				</div>
+			</div>
+			<div class="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+				<BaseSelect v-model="selectedFramework" label="Custom Option & Searchable" :options="frameworkOptions" searchable clearable hint="Custom display with icons and description metadata">
+					<template #option="{ option }">
+						<span class="text-base mr-1">{{ option.icon }}</span>
+						<div class="flex flex-col">
+							<span class="font-medium text-xs">{{ option.label }}</span>
+							<span class="text-[10px] text-muted-foreground">{{ option.desc }}</span>
+						</div>
+					</template>
+					<template #selected-item="{ item }">
+						<div class="flex items-center gap-1.5">
+							<span>{{ item.icon }}</span>
+							<span class="font-semibold text-foreground text-xs">{{ item.label }}</span>
+						</div>
+					</template>
+				</BaseSelect>
+
+				<BaseSelect v-model="multiTags" label="Multi-Select + Creatable" :options="tagOptions" multiple searchable creatable clearable selectAll hint="Select multiple, select all, or type a new option then Enter" />
+
+				<BaseSelect v-model="asyncUser" label="Async / Debounce Search" :loadOptions="loadUsersApi" :debounce="400" searchable clearable placeholder="Search users via API..." hint="Async search with debounced requests and loader">
+					<template #option="{ option }">
+						<div class="flex flex-col">
+							<span class="font-medium text-xs">{{ option.label }}</span>
+							<span class="text-[10px] text-muted-foreground">{{ option.email }}</span>
+						</div>
+					</template>
+				</BaseSelect>
+
+				<BaseSelect v-model="selectedProvince" label="Dependent: Region" :options="provinces" clearable placeholder="Select region..." @change="onProvinceChange" />
+
+				<BaseSelect v-model="selectedCity" label="Dependent: City" :options="currentCities" :disabled="!selectedProvince" clearable placeholder="Select city..." :hint="!selectedProvince ? 'Please select a region first' : ''" />
 			</div>
 		</div>
 
