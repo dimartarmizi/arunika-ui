@@ -8,6 +8,7 @@ import BaseRange from '../components/form/BaseRange.vue'
 import BaseCheckbox from '../components/form/BaseCheckbox.vue'
 import BaseRadio from '../components/form/BaseRadio.vue'
 import BaseFileInput from '../components/form/BaseFileInput.vue'
+import BaseFileUpload from '../components/form/BaseFileUpload.vue'
 
 const form = ref({
 	text: '',
@@ -37,7 +38,6 @@ const options = [
 	{ value: '3', label: 'Option 3' }
 ]
 
-// Advanced Select Demo States
 const selectedFramework = ref('vue')
 const frameworkOptions = [
 	{ value: 'vue', label: 'Vue.js', icon: '💚', desc: 'Progressive Framework' },
@@ -84,7 +84,6 @@ const onProvinceChange = (prov) => {
 	currentCities.value = prov ? cityMap[prov] || [] : []
 }
 
-// Async + Infinite Scroll Simulator
 const asyncUser = ref(null)
 const loadUsersApi = async (query = '', isAppend = false) => {
 	await new Promise((r) => setTimeout(r, 600))
@@ -102,6 +101,10 @@ const loadUsersApi = async (query = '', isAppend = false) => {
 	}
 	return mockData
 }
+
+const uploadedDocs = ref([])
+const uploadedImages = ref([])
+const chunkedFiles = ref([])
 
 const testState = ref('normal')
 const testForm = ref({
@@ -189,6 +192,22 @@ const testForm = ref({
 				<BaseSelect v-model="selectedProvince" label="Dependent: Region" :options="provinces" clearable placeholder="Select region..." @change="onProvinceChange" />
 
 				<BaseSelect v-model="selectedCity" label="Dependent: City" :options="currentCities" :disabled="!selectedProvince" clearable placeholder="Select city..." :hint="!selectedProvince ? 'Please select a region first' : ''" />
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<div>
+					<h4 class="font-semibold text-sm text-foreground">Advanced File Upload Showcase</h4>
+					<p class="text-xs text-muted-foreground">Drag & drop, multi-file, preview, progress, image compression, chunks & validation</p>
+				</div>
+			</div>
+			<div class="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<BaseFileUpload v-model="uploadedDocs" label="Multiple Documents" multiple :maxFiles="5" :maxSize="15 * 1024 * 1024" hint="Drag & drop PDF, ZIP, or Docs (max 15MB each, up to 5 files)" />
+
+				<BaseFileUpload v-model="uploadedImages" label="Image Upload + Client Compression" multiple accept="image/*" compressImages :maxWidth="1200" :maxHeight="1200" :quality="0.75" hint="Images auto-resized to max 1200px & compressed before upload" />
+
+				<BaseFileUpload v-model="chunkedFiles" label="Chunked / Resumable Large File" chunked :chunkSize="512 * 1024" :maxSize="100 * 1024 * 1024" hint="Simulates resumable chunk uploads (512KB chunks, pause & retry)" />
 			</div>
 		</div>
 
