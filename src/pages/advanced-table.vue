@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import BaseAdvancedTable from '../components/ui/BaseAdvancedTable.vue'
+import BaseTable from '../components/ui/BaseTable.vue'
 import { IconPencil, IconTrash, IconEye, IconRefresh, IconAlertTriangle, IconDownload, IconPlus } from '@tabler/icons-vue'
 
 const advancedColumns = [
@@ -84,7 +84,7 @@ const handleBulkAction = ({ action, ids }) => {
 
 		<div class="card overflow-hidden">
 			<div class="card-body">
-				<BaseAdvancedTable :columns="advancedColumns" :data="products" :loading="isLoading" :error="errorMessage" :default-page-size="10" sticky-header max-height="600px" @retry="handleRetry" @bulk-action="handleBulkAction">
+				<BaseTable advanced :columns="advancedColumns" :data="products" :loading="isLoading" :error="errorMessage" :default-page-size="10" sticky-header max-height="600px" @retry="handleRetry" @bulk-action="handleBulkAction">
 					<template #toolbar>
 						<button class="btn btn-primary h-9 px-3 gap-1.5">
 							<IconPlus :size="16" />
@@ -133,7 +133,7 @@ const handleBulkAction = ({ action, ids }) => {
 							</button>
 						</div>
 					</template>
-				</BaseAdvancedTable>
+				</BaseTable>
 			</div>
 		</div>
 	</div>

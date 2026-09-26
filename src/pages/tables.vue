@@ -36,7 +36,7 @@ const products = ref([
 		<div class="card overflow-hidden">
 			<div class="card-header">
 				<div>
-					<h4 class="font-semibold text-sm text-foreground">Standard Table (Reusable BaseTable)</h4>
+					<h4 class="font-semibold text-sm text-foreground">Standard Table</h4>
 					<p class="text-xs text-muted-foreground">Standard table with cell slots for custom badges & action buttons</p>
 				</div>
 			</div>
