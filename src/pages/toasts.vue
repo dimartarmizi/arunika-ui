@@ -25,13 +25,13 @@ const removeToast = (id) => {
 <template>
 	<div class="flex flex-col gap-6">
 		<div>
-			<h3 class="text-xl font-bold text-slate-900">Toasts</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Floating notifications stacked in any screen corner.</p>
+			<h3 class="text-xl font-bold text-foreground">Toasts</h3>
+			<p class="text-xs sm:text-sm text-muted-foreground">Floating notifications stacked in any screen corner.</p>
 		</div>
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Trigger Toast Notifications</h4>
+				<h4 class="font-semibold text-sm text-foreground">Trigger Toast Notifications</h4>
 			</div>
 			<div class="card-body flex flex-col gap-4">
 				<div class="flex flex-wrap items-center gap-3">
@@ -47,7 +47,7 @@ const removeToast = (id) => {
 						Trigger Warning Toast
 					</button>
 
-					<button @click="addToast('error', 'Network Error', 'Could not reach API gateway.')" class="btn btn-danger">
+					<button @click="addToast('error', 'Network Error', 'Could not reach API gateway.')" class="btn btn-destructive">
 						Trigger Error Toast
 					</button>
 
@@ -56,8 +56,8 @@ const removeToast = (id) => {
 					</button>
 				</div>
 
-				<div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-4">
-					<span class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Screen Placement:</span>
+				<div class="pt-4 border-t border-border flex flex-wrap items-center gap-4">
+					<span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Screen Placement:</span>
 					<div class="flex flex-wrap gap-2">
 						<button v-for="pos in [
 							{ label: 'Bottom Right', val: 'toast-bottom toast-end' },
@@ -78,7 +78,7 @@ const removeToast = (id) => {
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Static Toast Variations</h4>
+				<h4 class="font-semibold text-sm text-foreground">Static Toast Variations</h4>
 			</div>
 			<div class="card-body">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -27,14 +27,14 @@ const handleResetPassword = () => {
 </script>
 
 <template>
-	<div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-slate-100">
+	<div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-background">
 		<div class="w-full max-w-md card-elevated p-6 sm:p-8">
 			<div class="text-center mb-8">
-				<div class="icon-box icon-box-lg icon-box-primary mx-auto mb-3 shadow-md shadow-blue-500/20">
+				<div class="icon-box icon-box-lg icon-box-primary mx-auto mb-3 shadow-md shadow-primary/20">
 					<IconBuildingStore :size="28" stroke-width="2" />
 				</div>
-				<h1 class="text-2xl font-bold tracking-tight text-slate-900">Reset Password</h1>
-				<p class="text-sm text-slate-500 mt-1">Create a new secure password for your account</p>
+				<h1 class="text-2xl font-bold tracking-tight text-foreground">Reset Password</h1>
+				<p class="text-sm text-muted-foreground mt-1">Create a new secure password for your account</p>
 			</div>
 
 			<BaseAlert v-if="isSuccess" variant="success" class="mb-4">
@@ -51,7 +51,7 @@ const handleResetPassword = () => {
 						<IconLock :size="18" />
 					</template>
 					<template #suffix>
-						<button type="button" @click="showPassword = !showPassword" class="flex items-center text-slate-400 hover:text-slate-600 cursor-pointer">
+						<button type="button" @click="showPassword = !showPassword" class="flex items-center text-muted-foreground hover:text-muted-foreground cursor-pointer">
 							<IconEyeOff v-if="showPassword" :size="18" />
 							<IconEye v-else :size="18" />
 						</button>
@@ -63,7 +63,7 @@ const handleResetPassword = () => {
 						<IconLock :size="18" />
 					</template>
 					<template #suffix>
-						<button type="button" @click="showConfirmPassword = !showConfirmPassword" class="flex items-center text-slate-400 hover:text-slate-600 cursor-pointer">
+						<button type="button" @click="showConfirmPassword = !showConfirmPassword" class="flex items-center text-muted-foreground hover:text-muted-foreground cursor-pointer">
 							<IconEyeOff v-if="showConfirmPassword" :size="18" />
 							<IconEye v-else :size="18" />
 						</button>
@@ -75,7 +75,7 @@ const handleResetPassword = () => {
 				</button>
 
 				<div class="flex items-center justify-center gap-1.5">
-					<router-link to="/login" class="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-blue-600 transition">
+					<router-link to="/login" class="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-primary transition">
 						<IconArrowLeft :size="14" />
 						<span>Back to Sign In</span>
 					</router-link>

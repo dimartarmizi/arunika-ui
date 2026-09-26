@@ -29,7 +29,7 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-	<div class="min-h-screen bg-slate-50 text-slate-800 antialiased font-sans">
+	<div class="min-h-screen bg-background text-foreground antialiased font-sans transition-colors duration-200">
 		<router-view v-if="isStandalonePage" />
 
 		<div v-else class="flex min-h-screen">

@@ -30,13 +30,13 @@ const triggerLoading = () => {
 <template>
 	<div class="flex flex-col gap-6">
 		<div>
-			<h3 class="text-xl font-bold text-slate-900">Buttons</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Semantic buttons, state styling, and interactive button groups.</p>
+			<h3 class="text-xl font-bold text-foreground">Buttons</h3>
+			<p class="text-xs sm:text-sm text-muted-foreground">Semantic buttons, state styling, and interactive button groups.</p>
 		</div>
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Button Variants</h4>
+				<h4 class="font-semibold text-sm text-foreground">Button Variants</h4>
 			</div>
 			<div class="card-body flex flex-wrap items-center gap-3">
 				<button class="btn btn-primary">Primary</button>
@@ -45,14 +45,14 @@ const triggerLoading = () => {
 				<button class="btn btn-ghost">Ghost</button>
 				<button class="btn btn-success">Success</button>
 				<button class="btn btn-warning">Warning</button>
-				<button class="btn btn-danger">Danger</button>
+				<button class="btn btn-destructive">Danger</button>
 				<button class="btn btn-info">Info</button>
 			</div>
 		</div>
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Button Sizes</h4>
+				<h4 class="font-semibold text-sm text-foreground">Button Sizes</h4>
 			</div>
 			<div class="card-body flex flex-wrap items-center gap-4">
 				<button class="btn btn-primary btn-sm">Small (btn-sm)</button>
@@ -63,7 +63,7 @@ const triggerLoading = () => {
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Icons & States</h4>
+				<h4 class="font-semibold text-sm text-foreground">Icons & States</h4>
 			</div>
 			<div class="card-body flex flex-col gap-4">
 				<div class="flex flex-wrap items-center gap-3">
@@ -79,13 +79,13 @@ const triggerLoading = () => {
 						<IconDownload :size="16" />
 						<span>Export CSV</span>
 					</button>
-					<button class="btn btn-danger">
+					<button class="btn btn-destructive">
 						<IconTrash :size="16" />
 						<span>Delete Item</span>
 					</button>
 				</div>
 
-				<div class="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-100">
+				<div class="flex flex-wrap items-center gap-3 pt-3 border-t border-border">
 					<div class="flex items-center gap-2">
 						<button class="btn btn-icon btn-sm btn-secondary" title="Bookmark (btn-sm)">
 							<IconBookmark :size="14" />
@@ -101,7 +101,7 @@ const triggerLoading = () => {
 					<button class="btn btn-icon btn-outline" title="Copy">
 						<IconCopy :size="16" />
 					</button>
-					<button class="btn btn-icon btn-danger" title="Delete">
+					<button class="btn btn-icon btn-destructive" title="Delete">
 						<IconTrash :size="16" />
 					</button>
 
@@ -118,11 +118,11 @@ const triggerLoading = () => {
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Button Groups</h4>
+				<h4 class="font-semibold text-sm text-foreground">Button Groups</h4>
 			</div>
 			<div class="card-body flex flex-col gap-6">
 				<div>
-					<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Segmented Filter</p>
+					<p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Segmented Filter</p>
 					<div class="btn-group">
 						<button @click="activePeriod = 'day'" :class="['btn', activePeriod === 'day' ? 'btn-primary' : 'btn-outline']">
 							Day
@@ -140,7 +140,7 @@ const triggerLoading = () => {
 				</div>
 
 				<div>
-					<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Text Alignment</p>
+					<p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Text Alignment</p>
 					<div class="btn-group">
 						<button @click="activeAlign = 'left'" :class="['btn btn-icon', activeAlign === 'left' ? 'btn-primary' : 'btn-outline']" title="Align Left">
 							<IconAlignLeft :size="16" />
@@ -155,7 +155,7 @@ const triggerLoading = () => {
 				</div>
 
 				<div>
-					<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Split Action</p>
+					<p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Split Action</p>
 					<div class="flex flex-wrap items-center gap-4">
 						<div class="btn-group">
 							<button class="btn btn-primary">Save Changes</button>
@@ -177,7 +177,7 @@ const triggerLoading = () => {
 				</div>
 
 				<div>
-					<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Vertical Group</p>
+					<p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Vertical Group</p>
 					<div class="btn-group-vertical w-48">
 						<button class="btn btn-outline justify-start">Overview</button>
 						<button class="btn btn-outline justify-start">Billing & Invoices</button>

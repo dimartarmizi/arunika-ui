@@ -16,13 +16,13 @@ const newProjectDesc = ref('')
 <template>
 	<div class="flex flex-col gap-6">
 		<div>
-			<h3 class="text-xl font-bold text-slate-900">Modals</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Dialog windows rendered on top of the main document view.</p>
+			<h3 class="text-xl font-bold text-foreground">Modals</h3>
+			<p class="text-xs sm:text-sm text-muted-foreground">Dialog windows rendered on top of the main document view.</p>
 		</div>
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Modal Triggers</h4>
+				<h4 class="font-semibold text-sm text-foreground">Modal Triggers</h4>
 			</div>
 			<div class="card-body">
 				<div class="flex flex-wrap gap-3">
@@ -30,7 +30,7 @@ const newProjectDesc = ref('')
 						Standard Modal
 					</button>
 
-					<button @click="showConfirmModal = true" class="btn btn-danger">
+					<button @click="showConfirmModal = true" class="btn btn-destructive">
 						Delete Confirmation
 					</button>
 
@@ -56,19 +56,19 @@ const newProjectDesc = ref('')
 
 		<BaseModal v-model="showConfirmModal" title="Delete User Account" size="sm">
 			<div class="flex items-start gap-3">
-				<div class="icon-box icon-box-md bg-rose-100 text-rose-600 shrink-0">
+				<div class="icon-box icon-box-md bg-destructive-soft text-destructive shrink-0">
 					<IconAlertTriangle :size="20" />
 				</div>
 				<div>
-					<p class="font-medium text-slate-800">Are you sure?</p>
-					<p class="text-xs text-slate-500 mt-1">
+					<p class="font-medium text-foreground">Are you sure?</p>
+					<p class="text-xs text-muted-foreground mt-1">
 						This action cannot be undone. All associated data will be permanently removed.
 					</p>
 				</div>
 			</div>
 			<template #footer="{ close }">
 				<button @click="close" class="btn btn-ghost">Cancel</button>
-				<button @click="close" class="btn btn-danger">Delete Account</button>
+				<button @click="close" class="btn btn-destructive">Delete Account</button>
 			</template>
 		</BaseModal>
 
@@ -91,8 +91,8 @@ const newProjectDesc = ref('')
 
 		<BaseModal v-model="showLargeModal" title="Detailed Audit Log" size="lg">
 			<div class="flex flex-col gap-3">
-				<p class="text-xs text-slate-500">Showing recent activity recorded by the system kernel:</p>
-				<div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs font-mono text-slate-700 flex flex-col gap-1.5 overflow-x-auto">
+				<p class="text-xs text-muted-foreground">Showing recent activity recorded by the system kernel:</p>
+				<div class="bg-background p-4 rounded-xl border border-border text-xs font-mono text-muted-foreground flex flex-col gap-1.5 overflow-x-auto">
 					<p>[2026-09-25 10:14:02] AUTH: User admin@arunika.io logged in successfully.</p>
 					<p>[2026-09-25 10:15:33] SYSTEM: Memory consumption peaked at 42%.</p>
 					<p>[2026-09-25 10:20:11] DB: Auto-vacuum completed in 41ms.</p>

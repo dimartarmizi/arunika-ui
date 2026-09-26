@@ -48,21 +48,21 @@ const testForm = ref({
 <template>
 	<div class="flex flex-col gap-6">
 		<div>
-			<h3 class="text-xl font-bold text-slate-900">Form Elements</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Compilation of standard form input elements.</p>
+			<h3 class="text-xl font-bold text-foreground">Form Elements</h3>
+			<p class="text-xs sm:text-sm text-muted-foreground">Compilation of standard form input elements.</p>
 		</div>
 
 		<div class="card">
 			<div class="card-header flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 				<div>
-					<h4 class="font-semibold text-sm text-slate-800">Interactive State Tester</h4>
-					<p class="text-xs text-slate-500">Klik tombol state untuk menguji respon visual input secara langsung.</p>
+					<h4 class="font-semibold text-sm text-foreground">Interactive State Tester</h4>
+					<p class="text-xs text-muted-foreground">Klik tombol state untuk menguji respon visual input secara langsung.</p>
 				</div>
 				<div class="btn-group">
 					<button type="button" @click="testState = 'normal'" :class="['btn btn-sm', testState === 'normal' ? 'btn-primary' : 'btn-outline']">
 						Normal
 					</button>
-					<button type="button" @click="testState = 'error'" :class="['btn btn-sm', testState === 'error' ? 'btn-danger' : 'btn-outline']">
+					<button type="button" @click="testState = 'error'" :class="['btn btn-sm', testState === 'error' ? 'btn-destructive' : 'btn-outline']">
 						Error
 					</button>
 					<button type="button" @click="testState = 'success'" :class="['btn btn-sm', testState === 'success' ? 'btn-success' : 'btn-outline']">
@@ -140,7 +140,7 @@ const testForm = ref({
 
 			<input type="hidden" name="token" value="secret_csrf_12345" />
 
-			<div class="pt-6 border-t border-slate-100 flex flex-wrap items-center gap-3">
+			<div class="pt-6 border-t border-border flex flex-wrap items-center gap-3">
 				<input type="submit" value="Submit" class="btn btn-primary" />
 
 				<input type="reset" value="Reset" class="btn btn-secondary" />

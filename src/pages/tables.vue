@@ -25,8 +25,8 @@ const products = ref([
 	<div class="flex flex-col gap-6">
 		<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 			<div>
-				<h3 class="text-xl font-bold text-slate-900">Tables</h3>
-				<p class="text-xs sm:text-sm text-slate-500">Standard, striped, and compact table variants using BaseTable.</p>
+				<h3 class="text-xl font-bold text-foreground">Tables</h3>
+				<p class="text-xs sm:text-sm text-muted-foreground">Standard, striped, and compact table variants using BaseTable.</p>
 			</div>
 			<router-link to="/advanced-table" class="btn btn-outline btn-sm self-start sm:self-auto">
 				Go to Advanced Table &rarr;
@@ -36,32 +36,32 @@ const products = ref([
 		<div class="card overflow-hidden">
 			<div class="card-header">
 				<div>
-					<h4 class="font-semibold text-sm text-slate-800">Standard Table (Reusable BaseTable)</h4>
-					<p class="text-xs text-slate-500">Standard table with cell slots for custom badges & action buttons</p>
+					<h4 class="font-semibold text-sm text-foreground">Standard Table (Reusable BaseTable)</h4>
+					<p class="text-xs text-muted-foreground">Standard table with cell slots for custom badges & action buttons</p>
 				</div>
 			</div>
 			<BaseTable :columns="columns" :data="products">
 				<template #cell(product)="{ value }">
-					<span class="font-medium text-slate-900 text-xs sm:text-sm">{{ value }}</span>
+					<span class="font-medium text-foreground text-xs sm:text-sm">{{ value }}</span>
 				</template>
 
 				<template #cell(category)="{ value }">
-					<span class="text-xs text-slate-500">{{ value }}</span>
+					<span class="text-xs text-muted-foreground">{{ value }}</span>
 				</template>
 
 				<template #cell(stock)="{ value }">
-					<span class="text-xs font-semibold text-slate-700">{{ value }}</span>
+					<span class="text-xs font-semibold text-muted-foreground">{{ value }}</span>
 				</template>
 
 				<template #cell(price)="{ value }">
-					<span class="text-xs sm:text-sm font-semibold text-slate-900">${{ Number(value).toFixed(2) }}</span>
+					<span class="text-xs sm:text-sm font-semibold text-foreground">${{ Number(value).toFixed(2) }}</span>
 				</template>
 
 				<template #cell(status)="{ value }">
 					<span :class="[
 						'badge',
 						value === 'In Stock' ? 'badge-success' :
-							value === 'Low Stock' ? 'badge-warning' : 'badge-danger'
+							value === 'Low Stock' ? 'badge-warning' : 'badge-destructive'
 					]">
 						{{ value }}
 					</span>
@@ -72,10 +72,10 @@ const products = ref([
 						<button class="btn btn-ghost btn-icon" title="View details">
 							<IconEye :size="16" />
 						</button>
-						<button class="btn btn-ghost btn-icon hover:text-blue-600" title="Edit item">
+						<button class="btn btn-ghost btn-icon hover:text-primary" title="Edit item">
 							<IconPencil :size="16" />
 						</button>
-						<button class="btn btn-ghost btn-icon hover:text-rose-600" title="Delete item">
+						<button class="btn btn-ghost btn-icon hover:text-destructive" title="Delete item">
 							<IconTrash :size="16" />
 						</button>
 					</div>
@@ -86,22 +86,22 @@ const products = ref([
 		<div class="card overflow-hidden">
 			<div class="card-header">
 				<div>
-					<h4 class="font-semibold text-sm text-slate-800">Striped Variant</h4>
-					<p class="text-xs text-slate-500">Adds alternating background colors using <code>striped</code> prop</p>
+					<h4 class="font-semibold text-sm text-foreground">Striped Variant</h4>
+					<p class="text-xs text-muted-foreground">Adds alternating background colors using <code>striped</code> prop</p>
 				</div>
 			</div>
 			<BaseTable :columns="columns.slice(0, 5)" :data="products" striped>
 				<template #cell(product)="{ value }">
-					<span class="font-medium text-slate-900 text-xs sm:text-sm">{{ value }}</span>
+					<span class="font-medium text-foreground text-xs sm:text-sm">{{ value }}</span>
 				</template>
 				<template #cell(price)="{ value }">
-					<span class="font-semibold text-slate-900 text-xs sm:text-sm">${{ Number(value).toFixed(2) }}</span>
+					<span class="font-semibold text-foreground text-xs sm:text-sm">${{ Number(value).toFixed(2) }}</span>
 				</template>
 				<template #cell(status)="{ value }">
 					<span :class="[
 						'badge',
 						value === 'In Stock' ? 'badge-success' :
-							value === 'Low Stock' ? 'badge-warning' : 'badge-danger'
+							value === 'Low Stock' ? 'badge-warning' : 'badge-destructive'
 					]">
 						{{ value }}
 					</span>
@@ -112,8 +112,8 @@ const products = ref([
 		<div class="card overflow-hidden">
 			<div class="card-header">
 				<div>
-					<h4 class="font-semibold text-sm text-slate-800">Compact & Bordered Variant</h4>
-					<p class="text-xs text-slate-500">Dense density layout with full borders using <code>compact</code> and <code>bordered</code> props</p>
+					<h4 class="font-semibold text-sm text-foreground">Compact & Bordered Variant</h4>
+					<p class="text-xs text-muted-foreground">Dense density layout with full borders using <code>compact</code> and <code>bordered</code> props</p>
 				</div>
 			</div>
 			<div class="card-body">
@@ -122,7 +122,7 @@ const products = ref([
 						<span :class="[
 							'badge text-[10px]',
 							value === 'In Stock' ? 'badge-success' :
-								value === 'Low Stock' ? 'badge-warning' : 'badge-danger'
+								value === 'Low Stock' ? 'badge-warning' : 'badge-destructive'
 						]">
 							{{ value }}
 						</span>

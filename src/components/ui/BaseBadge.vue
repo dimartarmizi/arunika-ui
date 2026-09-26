@@ -6,7 +6,7 @@ const props = defineProps({
 	variant: {
 		type: String,
 		default: 'primary',
-		validator: (val) => ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'neutral', 'muted'].includes(val)
+		validator: (val) => ['primary', 'secondary', 'success', 'warning', 'destructive', 'info', 'neutral', 'muted'].includes(val)
 	},
 	size: {
 		type: String,
@@ -34,14 +34,14 @@ const props = defineProps({
 defineEmits(['dismiss'])
 
 const dotColors = {
-	primary: 'bg-blue-600',
-	secondary: 'bg-slate-600',
-	success: 'bg-emerald-600',
-	warning: 'bg-amber-500',
-	danger: 'bg-rose-600',
-	info: 'bg-sky-500',
-	neutral: 'bg-slate-500',
-	muted: 'bg-slate-400'
+	primary: 'bg-primary',
+	secondary: 'bg-muted-foreground',
+	success: 'bg-success',
+	warning: 'bg-warning',
+	destructive: 'bg-destructive',
+	info: 'bg-info',
+	neutral: 'bg-muted',
+	muted: 'bg-muted'
 }
 
 const badgeClass = computed(() => {
@@ -67,12 +67,12 @@ const badgeClass = computed(() => {
 	<span :class="badgeClass">
 		<span v-if="dot" :class="[
 			'w-1.5 h-1.5 rounded-full shrink-0',
-			solid ? 'bg-white' : dotColors[variant] || 'bg-current'
+			solid ? 'bg-primary-foreground' : dotColors[variant] || 'bg-current'
 		]"></span>
 
 		<slot />
 
-		<button v-if="dismissible" type="button" @click.stop="$emit('dismiss')" class="p-0.5 rounded-full hover:bg-black/10 dark:hover:bg-white/20 transition cursor-pointer shrink-0 -mr-1" aria-label="Remove badge">
+		<button v-if="dismissible" type="button" @click.stop="$emit('dismiss')" class="p-0.5 rounded-full hover:bg-foreground/10 transition cursor-pointer shrink-0 -mr-1" aria-label="Remove badge">
 			<IconX :size="size === 'sm' ? 10 : 12" />
 		</button>
 	</span>

@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons-vue'
 import BaseInput from '../components/form/BaseInput.vue'
 import BaseSelect from '../components/form/BaseSelect.vue'
+import BaseTable from '../components/ui/BaseTable.vue'
 
 const searchQuery = ref('')
 const selectedRole = ref('All')
@@ -18,6 +19,14 @@ const roleOptions = [
 	{ value: 'Admin', label: 'Admin' },
 	{ value: 'Editor', label: 'Editor' },
 	{ value: 'Staff', label: 'Staff' }
+]
+
+const userColumns = [
+	{ key: 'user', label: 'Name & Email' },
+	{ key: 'role', label: 'Role' },
+	{ key: 'status', label: 'Status' },
+	{ key: 'joined', label: 'Joined Date' },
+	{ key: 'action', label: 'Action', align: 'right' }
 ]
 
 const users = ref([
@@ -42,8 +51,8 @@ const filteredUsers = computed(() => {
 	<div class="flex flex-col gap-6">
 		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 			<div>
-				<h3 class="text-xl font-bold text-slate-900">User Management</h3>
-				<p class="text-xs sm:text-sm text-slate-500">Manage user access, roles, and registered accounts.</p>
+				<h3 class="text-xl font-bold text-foreground">User Management</h3>
+				<p class="text-xs sm:text-sm text-muted-foreground">Manage user access, roles, and registered accounts.</p>
 			</div>
 			<button class="btn btn-primary">
 				<IconPlus :size="16" />
@@ -68,56 +77,43 @@ const filteredUsers = computed(() => {
 		</div>
 
 		<div class="card overflow-hidden">
-			<div class="overflow-x-auto">
-				<table class="table">
-					<thead class="table-thead">
-						<tr>
-							<th class="table-th">Name & Email</th>
-							<th class="table-th">Role</th>
-							<th class="table-th">Status</th>
-							<th class="table-th">Joined Date</th>
-							<th class="table-th text-right">Action</th>
-						</tr>
-					</thead>
-					<tbody class="divide-y divide-slate-100">
-						<tr v-for="user in filteredUsers" :key="user.id" class="table-row">
-							<td class="table-td">
-								<div class="flex items-center gap-3">
-									<img :src="user.avatar" class="avatar avatar-sm" />
-									<div>
-										<p class="font-semibold text-slate-900 text-xs sm:text-sm">{{ user.name }}</p>
-										<p class="text-xs text-slate-500">{{ user.email }}</p>
-									</div>
-								</div>
-							</td>
-							<td class="table-td">
-								<span class="badge badge-neutral rounded-md">
-									{{ user.role }}
-								</span>
-							</td>
-							<td class="table-td">
-								<span :class="[
-									'badge',
-									user.status === 'Active' ? 'badge-success' : 'badge-muted'
-								]">
-									{{ user.status }}
-								</span>
-							</td>
-							<td class="table-td text-xs text-slate-500">{{ user.joined }}</td>
-							<td class="table-td text-right">
-								<div class="inline-flex items-center gap-1">
-									<button class="btn btn-ghost btn-icon hover:text-blue-600">
-										<IconEdit :size="16" />
-									</button>
-									<button class="btn btn-ghost btn-icon hover:text-rose-600">
-										<IconTrash :size="16" />
-									</button>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<BaseTable :columns="userColumns" :data="filteredUsers">
+				<template #cell(user)="{ row }">
+					<div class="flex items-center gap-3">
+						<img :src="row.avatar" class="avatar avatar-sm" />
+						<div>
+							<p class="font-semibold text-foreground text-xs sm:text-sm">{{ row.name }}</p>
+							<p class="text-xs text-muted-foreground">{{ row.email }}</p>
+						</div>
+					</div>
+				</template>
+				<template #cell(role)="{ value }">
+					<span class="badge badge-neutral rounded-md">
+						{{ value }}
+					</span>
+				</template>
+				<template #cell(status)="{ value }">
+					<span :class="[
+						'badge',
+						value === 'Active' ? 'badge-success' : 'badge-muted'
+					]">
+						{{ value }}
+					</span>
+				</template>
+				<template #cell(joined)="{ value }">
+					<span class="text-xs text-muted-foreground">{{ value }}</span>
+				</template>
+				<template #cell(action)>
+					<div class="inline-flex items-center gap-1">
+						<button class="btn btn-ghost btn-icon hover:text-primary">
+							<IconPencil :size="16" />
+						</button>
+						<button class="btn btn-ghost btn-icon hover:text-destructive">
+							<IconTrash :size="16" />
+						</button>
+					</div>
+				</template>
+			</BaseTable>
 		</div>
 	</div>
 </template>

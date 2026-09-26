@@ -52,7 +52,7 @@ const selectTab = (id) => {
 				<span>{{ tab.label }}</span>
 				<span v-if="tab.badge !== undefined" :class="[
 					'px-1.5 py-0.5 text-[10px] rounded-full font-bold',
-					modelValue === tab.id ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-600'
+					modelValue === tab.id ? 'bg-primary-soft text-primary font-semibold' : 'bg-muted text-muted-foreground'
 				]">
 					{{ tab.badge }}
 				</span>

@@ -344,7 +344,7 @@ const resetFilters = () => {
 </script>
 
 <template>
-	<div class="flex flex-col gap-3 font-sans antialiased text-slate-800">
+	<div class="flex flex-col gap-3 font-sans antialiased text-foreground">
 		<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
 			<div class="flex items-center gap-2 flex-1 max-w-md">
 				<div class="w-full">
@@ -353,7 +353,7 @@ const resetFilters = () => {
 							<IconSearch :size="16" />
 						</template>
 						<template #suffix>
-							<button v-if="searchInput" @click="searchInput = ''; debouncedSearch = ''; currentPage = 1" class="text-slate-400 hover:text-slate-600 cursor-pointer">
+							<button v-if="searchInput" @click="searchInput = ''; debouncedSearch = ''; currentPage = 1" class="text-muted-foreground hover:text-muted-foreground cursor-pointer">
 								<IconX :size="14" />
 							</button>
 						</template>
@@ -362,11 +362,11 @@ const resetFilters = () => {
 
 				<button @click="showFilters = !showFilters" :class="[
 					'btn btn-outline h-10 px-3 gap-1.5 relative shrink-0',
-					showFilters || activeFiltersCount > 0 ? 'border-blue-500 text-blue-600 bg-blue-50/50' : ''
+					showFilters || activeFiltersCount > 0 ? 'border-primary text-primary bg-primary-soft' : ''
 				]" title="Column filters">
 					<IconFilter :size="16" />
 					<span class="hidden md:inline">Filters</span>
-					<span v-if="activeFiltersCount > 0" class="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">
+					<span v-if="activeFiltersCount > 0" class="w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center font-bold">
 						{{ activeFiltersCount }}
 					</span>
 				</button>
@@ -379,9 +379,9 @@ const resetFilters = () => {
 						<span class="hidden sm:inline">Columns</span>
 					</button>
 
-					<div v-if="showColumnPicker" class="absolute right-0 mt-1 w-48 bg-white rounded-xl shadow-xl border border-slate-200 p-2 z-40 flex flex-col gap-1">
-						<div class="text-[11px] font-bold text-slate-400 uppercase px-2 py-1">Toggle Columns</div>
-						<div v-for="col in columns" :key="col.key" class="px-2 py-1 hover:bg-slate-50 rounded-lg">
+					<div v-if="showColumnPicker" class="absolute right-0 mt-1 w-48 bg-card rounded-xl shadow-xl border border-border p-2 z-40 flex flex-col gap-1">
+						<div class="text-[11px] font-bold text-muted-foreground uppercase px-2 py-1">Toggle Columns</div>
+						<div v-for="col in columns" :key="col.key" class="px-2 py-1 hover:bg-muted rounded-lg">
 							<BaseCheckbox v-model="columnVisibility[col.key]" :label="col.label" />
 						</div>
 					</div>
@@ -391,28 +391,28 @@ const resetFilters = () => {
 			</div>
 		</div>
 
-		<div v-if="selectedRows.length > 0" class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 text-sm text-blue-900">
+		<div v-if="selectedRows.length > 0" class="bg-primary-soft border border-primary/20 rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 text-sm text-primary">
 			<span class="font-medium">
 				<strong>{{ selectedRows.length }}</strong> row(s) selected
 			</span>
 			<div class="flex items-center gap-2">
 				<slot name="bulk-actions" :selected="selectedRows" :clear="() => { selectedRows = []; $emit('selection-change', []) }">
-					<button @click="$emit('bulk-action', { action: 'delete', ids: [...selectedRows] }); selectedRows = []; $emit('selection-change', [])" class="btn btn-danger btn-sm gap-1.5" title="Delete selected">
+					<button @click="$emit('bulk-action', { action: 'delete', ids: [...selectedRows] }); selectedRows = []; $emit('selection-change', [])" class="btn btn-destructive btn-sm gap-1.5" title="Delete selected">
 						<IconTrash :size="15" />
 						<span>Delete Selected</span>
 					</button>
 				</slot>
-				<button @click="selectedRows = []; $emit('selection-change', [])" class="btn btn-ghost btn-sm text-blue-700 hover:bg-blue-100 gap-1.5" title="Clear selection">
+				<button @click="selectedRows = []; $emit('selection-change', [])" class="btn btn-ghost btn-sm text-primary hover:bg-primary-soft gap-1.5" title="Clear selection">
 					<IconX :size="15" />
 					<span>Clear Selection</span>
 				</button>
 			</div>
 		</div>
 
-		<div v-if="showFilters" class="p-4 bg-slate-100/70 border border-slate-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs">
+		<div v-if="showFilters" class="p-4 bg-muted/70 border border-border rounded-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs">
 			<template v-for="col in columns" :key="col.key">
 				<div v-if="col.filterType" class="flex flex-col gap-1.5">
-					<label class="font-semibold text-slate-700 text-xs">{{ col.label }}</label>
+					<label class="font-semibold text-muted-foreground text-xs">{{ col.label }}</label>
 
 					<BaseInput v-if="col.filterType === 'text'" v-model="columnFilters[col.key]" type="text" :placeholder="`Filter ${col.label}...`" />
 
@@ -420,40 +420,40 @@ const resetFilters = () => {
 
 					<div v-else-if="col.filterType === 'number-range'" class="flex items-center gap-2">
 						<BaseInput v-model.number="columnFilters[col.key].min" type="number" placeholder="Min" />
-						<span class="text-slate-400 font-bold shrink-0">-</span>
+						<span class="text-muted-foreground font-bold shrink-0">-</span>
 						<BaseInput v-model.number="columnFilters[col.key].max" type="number" placeholder="Max" />
 					</div>
 
 					<div v-else-if="col.filterType === 'date-range'" class="flex items-center gap-2">
 						<BaseDatePicker v-model="columnFilters[col.key].start" placeholder="Start date" />
-						<span class="text-slate-400 font-bold shrink-0">-</span>
+						<span class="text-muted-foreground font-bold shrink-0">-</span>
 						<BaseDatePicker v-model="columnFilters[col.key].end" placeholder="End date" />
 					</div>
 				</div>
 			</template>
 
-			<div class="sm:col-span-2 md:col-span-3 lg:col-span-4 flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
-				<button @click="resetFilters" class="btn btn-ghost btn-sm gap-1.5 text-slate-600 hover:text-slate-900">
+			<div class="sm:col-span-2 md:col-span-3 lg:col-span-4 flex items-center justify-end gap-2 pt-2 border-t border-border">
+				<button @click="resetFilters" class="btn btn-ghost btn-sm gap-1.5 text-muted-foreground hover:text-foreground">
 					<IconRefresh :size="14" />
 					<span>Reset All Filters</span>
 				</button>
 			</div>
 		</div>
 
-		<div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-xs relative z-0">
+		<div class="border border-border rounded-xl bg-card overflow-hidden shadow-xs relative z-0">
 			<div class="overflow-x-auto overflow-y-auto" :style="{ maxHeight: stickyHeader ? maxHeight : 'none' }">
 				<table class="table w-full border-collapse">
-					<thead :class="['table-thead bg-slate-50', stickyHeader ? 'sticky top-0 z-10 shadow-xs' : '']">
+					<thead :class="['table-thead bg-background', stickyHeader ? 'sticky top-0 z-10 shadow-xs' : '']">
 						<tr>
-							<th class="table-th w-10 text-center px-3 bg-slate-50">
+							<th class="table-th w-10 text-center px-3 bg-background">
 								<div class="flex items-center justify-center">
 									<BaseCheckbox :model-value="isAllSelected" :indeterminate="isSomeSelected" @update:model-value="toggleSelectAll" />
 								</div>
 							</th>
 
 							<th v-for="col in visibleColumns" :key="col.key" :style="{ width: columnWidths[col.key] || 'auto' }" :class="[
-								'table-th relative group select-none bg-slate-50',
-								col.sortable !== false ? 'cursor-pointer hover:bg-slate-100' : '',
+								'table-th relative group select-none bg-background',
+								col.sortable !== false ? 'cursor-pointer hover:bg-muted' : '',
 								col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
 							]" @click="toggleSort(col, $event)">
 								<div class="flex items-center gap-1.5" :class="col.align === 'right' ? 'justify-end' : col.align === 'center' ? 'justify-center' : 'justify-start'">
@@ -461,24 +461,24 @@ const resetFilters = () => {
 										<span>{{ col.label }}</span>
 									</slot>
 
-									<span v-if="col.sortable !== false" class="inline-flex items-center text-slate-400">
+									<span v-if="col.sortable !== false" class="inline-flex items-center text-muted-foreground">
 										<template v-if="getSortOrder(col.key) === 'asc'">
-											<IconChevronUp :size="15" class="text-blue-600 stroke-[2.5]" />
+											<IconChevronUp :size="15" class="text-primary stroke-[2.5]" />
 										</template>
 										<template v-else-if="getSortOrder(col.key) === 'desc'">
-											<IconChevronDown :size="15" class="text-blue-600 stroke-[2.5]" />
+											<IconChevronDown :size="15" class="text-primary stroke-[2.5]" />
 										</template>
 										<template v-else>
 											<IconSelector :size="15" class="opacity-0 group-hover:opacity-100 transition-opacity" />
 										</template>
 
-										<span v-if="getSortIndex(col.key)" class="text-[9px] font-bold text-blue-600 ml-0.5">
+										<span v-if="getSortIndex(col.key)" class="text-[9px] font-bold text-primary ml-0.5">
 											{{ getSortIndex(col.key) }}
 										</span>
 									</span>
 								</div>
 
-								<div v-if="col.resizable !== false" @click.stop @mousedown="startResize(col.key, $event)" class="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-blue-500/50 active:bg-blue-600 transition" title="Drag to resize"></div>
+								<div v-if="col.resizable !== false" @click.stop @mousedown="startResize(col.key, $event)" class="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-primary/50 active:bg-primary transition" title="Drag to resize"></div>
 							</th>
 						</tr>
 					</thead>
@@ -487,7 +487,7 @@ const resetFilters = () => {
 						<tr v-if="loading">
 							<td :colspan="visibleColumns.length + 1" class="p-8">
 								<div class="flex flex-col gap-3">
-									<div v-for="i in 5" :key="i" class="h-8 bg-slate-100 rounded-lg animate-pulse"></div>
+									<div v-for="i in 5" :key="i" class="h-8 bg-muted rounded-lg animate-pulse"></div>
 								</div>
 							</td>
 						</tr>
@@ -495,11 +495,11 @@ const resetFilters = () => {
 						<tr v-else-if="error">
 							<td :colspan="visibleColumns.length + 1" class="p-12 text-center">
 								<div class="flex flex-col items-center justify-center gap-2 max-w-sm mx-auto">
-									<div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center">
+									<div class="w-12 h-12 rounded-full bg-destructive-soft text-destructive flex items-center justify-center">
 										<IconAlertTriangle :size="24" />
 									</div>
-									<h5 class="font-bold text-sm text-slate-800">Failed to load records</h5>
-									<p class="text-xs text-slate-500">{{ error }}</p>
+									<h5 class="font-bold text-sm text-foreground">Failed to load records</h5>
+									<p class="text-xs text-muted-foreground">{{ error }}</p>
 									<button @click="$emit('retry')" class="btn btn-outline btn-sm mt-2 gap-1.5">
 										<IconRefresh :size="14" />
 										<span>Retry</span>
@@ -511,11 +511,11 @@ const resetFilters = () => {
 						<tr v-else-if="paginatedData.length === 0">
 							<td :colspan="visibleColumns.length + 1" class="p-12 text-center">
 								<div class="flex flex-col items-center justify-center gap-2 max-w-sm mx-auto">
-									<div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+									<div class="w-12 h-12 rounded-full bg-muted text-muted-foreground flex items-center justify-center">
 										<IconInbox :size="24" />
 									</div>
-									<h5 class="font-bold text-sm text-slate-800">No records found</h5>
-									<p class="text-xs text-slate-500">
+									<h5 class="font-bold text-sm text-foreground">No records found</h5>
+									<p class="text-xs text-muted-foreground">
 										{{ debouncedSearch || activeFiltersCount > 0 ? 'Try adjusting your search query or filters.' : 'No data records available at this time.' }}
 									</p>
 									<button v-if="debouncedSearch || activeFiltersCount > 0" @click="resetFilters" class="btn btn-outline btn-sm mt-2">
@@ -527,7 +527,7 @@ const resetFilters = () => {
 
 						<tr v-else v-for="(row, rowIndex) in paginatedData" :key="row.id || rowIndex" :class="[
 							'table-row transition-colors',
-							selectedRows.includes(row.id) ? 'bg-blue-50/60 hover:bg-blue-50' : ''
+							selectedRows.includes(row.id) ? 'bg-primary-soft' : ''
 						]">
 							<td class="table-td text-center px-3">
 								<div class="flex items-center justify-center">
@@ -548,44 +548,44 @@ const resetFilters = () => {
 				</table>
 			</div>
 
-			<div class="p-4 border-t border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-				<div class="flex items-center gap-3 text-slate-500 order-2 sm:order-1">
+			<div class="p-4 border-t border-border bg-background/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+				<div class="flex items-center gap-3 text-muted-foreground order-2 sm:order-1">
 					<span>
 						Showing
-						<strong class="text-slate-800 font-semibold">{{ filteredData.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}</strong>
+						<strong class="text-foreground font-semibold">{{ filteredData.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}</strong>
 						to
-						<strong class="text-slate-800 font-semibold">{{ Math.min(currentPage * pageSize, filteredData.length) }}</strong>
+						<strong class="text-foreground font-semibold">{{ Math.min(currentPage * pageSize, filteredData.length) }}</strong>
 						of
-						<strong class="text-slate-800 font-semibold">{{ filteredData.length }}</strong>
+						<strong class="text-foreground font-semibold">{{ filteredData.length }}</strong>
 						results
 					</span>
 
 					<div class="flex items-center gap-1.5 ml-2">
-						<span class="text-slate-400">Rows per page:</span>
-						<select v-model.number="pageSize" class="bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+						<span class="text-muted-foreground">Rows per page:</span>
+						<select v-model.number="pageSize" class="bg-card border border-border rounded-lg px-2 py-1 font-medium text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary">
 							<option v-for="opt in pageSizeOptions" :key="opt" :value="opt">{{ opt }}</option>
 						</select>
 					</div>
 				</div>
 
 				<div class="flex items-center gap-1 order-1 sm:order-2">
-					<button @click="currentPage = 1" :disabled="currentPage === 1" class="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-white cursor-pointer disabled:cursor-not-allowed text-slate-700" title="First page">
+					<button @click="currentPage = 1" :disabled="currentPage === 1" class="p-1.5 rounded-lg border border-border bg-card hover:bg-muted disabled:opacity-40 disabled:hover:bg-card cursor-pointer disabled:cursor-not-allowed text-muted-foreground" title="First page">
 						<IconChevronsLeft :size="16" />
 					</button>
 
-					<button @click="currentPage--" :disabled="currentPage === 1" class="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-white cursor-pointer disabled:cursor-not-allowed text-slate-700" title="Previous page">
+					<button @click="currentPage--" :disabled="currentPage === 1" class="p-1.5 rounded-lg border border-border bg-card hover:bg-muted disabled:opacity-40 disabled:hover:bg-card cursor-pointer disabled:cursor-not-allowed text-muted-foreground" title="Previous page">
 						<IconChevronLeft :size="16" />
 					</button>
 
-					<span class="px-3 py-1 font-semibold text-slate-800">
+					<span class="px-3 py-1 font-semibold text-foreground">
 						Page {{ currentPage }} of {{ totalPages }}
 					</span>
 
-					<button @click="currentPage++" :disabled="currentPage === totalPages" class="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-white cursor-pointer disabled:cursor-not-allowed text-slate-700" title="Next page">
+					<button @click="currentPage++" :disabled="currentPage === totalPages" class="p-1.5 rounded-lg border border-border bg-card hover:bg-muted disabled:opacity-40 disabled:hover:bg-card cursor-pointer disabled:cursor-not-allowed text-muted-foreground" title="Next page">
 						<IconChevronRight :size="16" />
 					</button>
 
-					<button @click="currentPage = totalPages" :disabled="currentPage === totalPages" class="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-white cursor-pointer disabled:cursor-not-allowed text-slate-700" title="Last page">
+					<button @click="currentPage = totalPages" :disabled="currentPage === totalPages" class="p-1.5 rounded-lg border border-border bg-card hover:bg-muted disabled:opacity-40 disabled:hover:bg-card cursor-pointer disabled:cursor-not-allowed text-muted-foreground" title="Last page">
 						<IconChevronsRight :size="16" />
 					</button>
 				</div>

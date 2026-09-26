@@ -21,14 +21,14 @@ const handleLogin = () => {
 </script>
 
 <template>
-	<div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-slate-100">
+	<div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-background">
 		<div class="w-full max-w-md card-elevated p-6 sm:p-8">
 			<div class="text-center mb-8">
-				<div class="icon-box icon-box-lg icon-box-primary mx-auto mb-3 shadow-md shadow-blue-500/20">
+				<div class="icon-box icon-box-lg icon-box-primary mx-auto mb-3 shadow-md shadow-primary/20">
 					<IconBuildingStore :size="28" stroke-width="2" />
 				</div>
-				<h1 class="text-2xl font-bold tracking-tight text-slate-900">Arunika</h1>
-				<p class="text-sm text-slate-500 mt-1">Sign in to administrative dashboard</p>
+				<h1 class="text-2xl font-bold tracking-tight text-foreground">Arunika</h1>
+				<p class="text-sm text-muted-foreground mt-1">Sign in to administrative dashboard</p>
 			</div>
 
 			<form @submit.prevent="handleLogin" class="flex flex-col gap-4">
@@ -40,15 +40,15 @@ const handleLogin = () => {
 
 				<div>
 					<div class="flex items-center justify-between mb-2">
-						<span class="text-xs font-semibold text-slate-700 uppercase tracking-wider">Password</span>
-						<router-link to="/forgot-password" class="text-xs font-medium text-blue-600 hover:text-blue-700">Forgot password?</router-link>
+						<span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Password</span>
+						<router-link to="/forgot-password" class="text-xs font-medium text-primary hover:opacity-80">Forgot password?</router-link>
 					</div>
 					<BaseInput v-model="loginForm.password" :type="showPassword ? 'text' : 'password'" required placeholder="••••••••">
 						<template #prefix>
 							<IconLock :size="18" />
 						</template>
 						<template #suffix>
-							<button type="button" @click="showPassword = !showPassword" class="flex items-center text-slate-400 hover:text-slate-600 cursor-pointer">
+							<button type="button" @click="showPassword = !showPassword" class="flex items-center text-muted-foreground hover:text-muted-foreground cursor-pointer">
 								<IconEyeOff v-if="showPassword" :size="18" />
 								<IconEye v-else :size="18" />
 							</button>
@@ -64,9 +64,9 @@ const handleLogin = () => {
 					Sign In Now
 				</button>
 
-				<p class="text-center text-xs text-slate-500">
+				<p class="text-center text-xs text-muted-foreground">
 					Don't have an account?
-					<router-link to="/register" class="font-semibold text-blue-600 hover:text-blue-700 ml-1">
+					<router-link to="/register" class="font-semibold text-primary hover:opacity-80 ml-1">
 						Sign up here
 					</router-link>
 				</p>

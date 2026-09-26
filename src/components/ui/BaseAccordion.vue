@@ -77,7 +77,7 @@ const toggle = (id) => {
 			<button type="button" @click="toggle(item.id ?? index)" class="accordion-header group" :aria-expanded="isOpen(item.id ?? index)">
 				<slot name="header" :item="item" :is-open="isOpen(item.id ?? index)" :index="index">
 					<div class="flex items-center gap-3 min-w-0 pr-2">
-						<component :is="item.icon" v-if="item.icon" :size="18" class="text-slate-500 shrink-0" />
+						<component :is="item.icon" v-if="item.icon" :size="18" class="text-muted-foreground shrink-0" />
 						<span class="truncate">{{ item.title }}</span>
 						<span v-if="item.badge" :class="['badge badge-sm shrink-0', item.badgeVariant ? `badge-${item.badgeVariant}` : 'badge-primary']">
 							{{ item.badge }}
@@ -85,8 +85,8 @@ const toggle = (id) => {
 					</div>
 				</slot>
 				<IconChevronDown :size="18" :class="[
-					'accordion-icon text-slate-400 shrink-0 transition-transform duration-200',
-					isOpen(item.id ?? index) ? 'rotate-180 text-blue-600' : ''
+					'accordion-icon text-muted-foreground shrink-0 transition-transform duration-200',
+					isOpen(item.id ?? index) ? 'rotate-180' : ''
 				]" />
 			</button>
 

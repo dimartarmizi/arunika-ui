@@ -65,7 +65,7 @@ const tableClasses = computed(() => [
 				</tr>
 
 				<tr v-if="data.length === 0">
-					<td :colspan="columns.length" class="table-td text-center py-8 text-slate-400 text-xs">
+					<td :colspan="columns.length" class="table-td text-center py-8 text-muted-foreground text-xs">
 						<slot name="empty">
 							No data available
 						</slot>

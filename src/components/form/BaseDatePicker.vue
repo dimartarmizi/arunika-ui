@@ -78,7 +78,7 @@ const openPicker = (e) => {
 		<label v-if="label" class="form-label flex items-center justify-between">
 			<span>
 				{{ label }}
-				<span v-if="required" class="text-rose-500 font-bold ml-0.5">*</span>
+				<span v-if="required" class="text-destructive font-bold ml-0.5">*</span>
 			</span>
 			<slot name="label-extra" />
 		</label>
@@ -90,10 +90,10 @@ const openPicker = (e) => {
 				computedState === 'warning' ? 'input-warning' : '',
 				disabled ? 'cursor-not-allowed opacity-60' : ''
 			]" />
-			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 gap-1.5">
-				<IconAlertCircle v-if="computedState === 'error'" :size="16" class="text-rose-500" />
-				<IconCircleCheck v-else-if="computedState === 'success'" :size="16" class="text-emerald-500" />
-				<IconAlertTriangle v-else-if="computedState === 'warning'" :size="16" class="text-amber-500" />
+			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-muted-foreground gap-1.5">
+				<IconAlertCircle v-if="computedState === 'error'" :size="16" class="text-destructive" />
+				<IconCircleCheck v-else-if="computedState === 'success'" :size="16" class="text-success" />
+				<IconAlertTriangle v-else-if="computedState === 'warning'" :size="16" class="text-warning" />
 				<IconClock v-if="isTime" :size="18" />
 				<IconCalendar v-else :size="18" />
 			</div>

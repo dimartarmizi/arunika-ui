@@ -114,7 +114,7 @@ onUnmounted(() => {
 		<label v-if="label" class="form-label flex items-center justify-between">
 			<span>
 				{{ label }}
-				<span v-if="required" class="text-rose-500 font-bold ml-0.5">*</span>
+				<span v-if="required" class="text-destructive font-bold ml-0.5">*</span>
 			</span>
 			<slot name="label-extra" />
 		</label>
@@ -126,26 +126,26 @@ onUnmounted(() => {
 				computedState === 'warning' ? 'input-warning' : '',
 				disabled ? 'cursor-not-allowed opacity-60' : ''
 			]">
-				<span :class="selectedOption ? 'text-slate-900 font-medium' : 'text-slate-500'">
+				<span :class="selectedOption ? 'text-foreground font-medium' : 'text-muted-foreground'">
 					{{ selectedOption ? selectedOption.label : placeholder }}
 				</span>
 				<div class="flex items-center gap-1.5 shrink-0 ml-2">
-					<IconAlertCircle v-if="computedState === 'error'" :size="16" class="text-rose-500" />
-					<IconCircleCheck v-else-if="computedState === 'success'" :size="16" class="text-emerald-500" />
-					<IconAlertTriangle v-else-if="computedState === 'warning'" :size="16" class="text-amber-500" />
-					<IconChevronDown :size="18" :class="['text-slate-400 transition-transform duration-200', isOpen ? 'rotate-180 text-blue-600' : '']" />
+					<IconAlertCircle v-if="computedState === 'error'" :size="16" class="text-destructive" />
+					<IconCircleCheck v-else-if="computedState === 'success'" :size="16" class="text-success" />
+					<IconAlertTriangle v-else-if="computedState === 'warning'" :size="16" class="text-warning" />
+					<IconChevronDown :size="18" :class="['text-muted-foreground transition-transform duration-200', isOpen ? 'rotate-180 text-primary' : '']" />
 				</div>
 			</button>
 
-			<div v-if="isOpen" class="absolute z-30 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-200/50 py-1.5 overflow-hidden">
+			<div v-if="isOpen" class="absolute z-30 w-full mt-1.5 bg-card border border-border rounded-xl shadow-xl py-1.5 overflow-hidden">
 				<div v-for="opt in normalizedOptions" :key="opt.value" @click="selectOption(opt)" :class="[
 					'flex items-center justify-between px-3.5 py-2 text-sm cursor-pointer transition select-none',
 					selectedOption?.value === opt.value
-						? 'bg-blue-50 text-blue-700 font-semibold'
-						: 'text-slate-700 hover:bg-slate-50'
+						? 'bg-primary-soft text-primary font-semibold'
+						: 'text-muted-foreground hover:bg-muted hover:text-foreground'
 				]">
 					<span>{{ opt.label }}</span>
-					<IconCheck v-if="selectedOption?.value === opt.value" :size="16" class="text-blue-600" />
+					<IconCheck v-if="selectedOption?.value === opt.value" :size="16" class="text-primary" />
 				</div>
 			</div>
 		</div>

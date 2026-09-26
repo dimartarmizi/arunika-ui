@@ -72,13 +72,13 @@ const feedbackMessage = computed(() => {
 		<label v-if="label" class="form-label flex items-center justify-between">
 			<span>
 				{{ label }}
-				<span v-if="required" class="text-rose-500 font-bold ml-0.5">*</span>
+				<span v-if="required" class="text-destructive font-bold ml-0.5">*</span>
 			</span>
 			<slot name="label-extra" />
 		</label>
 
 		<div class="relative">
-			<span v-if="$slots.prefix" class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+			<span v-if="$slots.prefix" class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground">
 				<slot name="prefix" />
 			</span>
 
@@ -95,9 +95,9 @@ const feedbackMessage = computed(() => {
 				<slot name="suffix" />
 			</div>
 			<div v-else-if="computedState" class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
-				<IconAlertCircle v-if="computedState === 'error'" :size="18" class="text-rose-500" />
-				<IconCircleCheck v-else-if="computedState === 'success'" :size="18" class="text-emerald-500" />
-				<IconAlertTriangle v-else-if="computedState === 'warning'" :size="18" class="text-amber-500" />
+				<IconAlertCircle v-if="computedState === 'error'" :size="18" class="text-destructive" />
+				<IconCircleCheck v-else-if="computedState === 'success'" :size="18" class="text-success" />
+				<IconAlertTriangle v-else-if="computedState === 'warning'" :size="18" class="text-warning" />
 			</div>
 		</div>
 

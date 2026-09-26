@@ -67,7 +67,7 @@ const dismiss = () => {
 
 		<slot name="actions"></slot>
 
-		<button v-if="dismissible" type="button" @click="dismiss" class="btn btn-ghost btn-icon btn-sm hover:bg-black/5 rounded-lg transition shrink-0 cursor-pointer" aria-label="Dismiss alert">
+		<button v-if="dismissible" type="button" @click="dismiss" class="btn btn-ghost btn-icon btn-sm hover:bg-foreground/5 rounded-lg transition shrink-0 cursor-pointer" aria-label="Dismiss alert">
 			<IconX :size="16" />
 		</button>
 	</div>

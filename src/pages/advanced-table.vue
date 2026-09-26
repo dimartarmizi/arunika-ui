@@ -67,15 +67,15 @@ const handleBulkAction = ({ action, ids }) => {
 	<div class="flex flex-col gap-6">
 		<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 			<div>
-				<h3 class="text-xl font-bold text-slate-900">Advanced Table</h3>
-				<p class="text-xs sm:text-sm text-slate-500">Full-featured enterprise table with pagination, sorting, search, filters, selection, and resize.</p>
+				<h3 class="text-xl font-bold text-foreground">Advanced Table</h3>
+				<p class="text-xs sm:text-sm text-muted-foreground">Full-featured enterprise table with pagination, sorting, search, filters, selection, and resize.</p>
 			</div>
 			<div class="flex items-center gap-2">
 				<button @click="simulateLoading" class="btn btn-outline btn-sm gap-1.5" title="Simulate Skeleton State">
 					<IconRefresh :size="14" :class="isLoading ? 'animate-spin' : ''" />
 					<span>Test Loading</span>
 				</button>
-				<button @click="simulateError" class="btn btn-outline btn-sm text-rose-600 border-rose-200 hover:bg-rose-50 gap-1.5" title="Simulate Error State">
+				<button @click="simulateError" class="btn btn-outline btn-sm text-destructive border-destructive/30 hover:bg-destructive-soft gap-1.5" title="Simulate Error State">
 					<IconAlertTriangle :size="14" />
 					<span>Test Error</span>
 				</button>
@@ -93,28 +93,28 @@ const handleBulkAction = ({ action, ids }) => {
 					</template>
 
 					<template #cell(product)="{ value }">
-						<span class="font-medium text-slate-900 text-xs sm:text-sm">{{ value }}</span>
+						<span class="font-medium text-foreground text-xs sm:text-sm">{{ value }}</span>
 					</template>
 
 					<template #cell(category)="{ value }">
-						<span class="text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md font-medium">{{ value }}</span>
+						<span class="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md font-medium">{{ value }}</span>
 					</template>
 
 					<template #cell(stock)="{ value }">
-						<span class="text-xs font-semibold" :class="value === 0 ? 'text-rose-600' : value < 10 ? 'text-amber-600' : 'text-slate-700'">
+						<span class="text-xs font-semibold" :class="value === 0 ? 'text-destructive' : value < 10 ? 'text-warning' : 'text-muted-foreground'">
 							{{ value }}
 						</span>
 					</template>
 
 					<template #cell(price)="{ value }">
-						<span class="text-xs sm:text-sm font-semibold text-slate-900">${{ Number(value).toFixed(2) }}</span>
+						<span class="text-xs sm:text-sm font-semibold text-foreground">${{ Number(value).toFixed(2) }}</span>
 					</template>
 
 					<template #cell(status)="{ value }">
 						<span :class="[
 							'badge',
 							value === 'In Stock' ? 'badge-success' :
-								value === 'Low Stock' ? 'badge-warning' : 'badge-danger'
+								value === 'Low Stock' ? 'badge-warning' : 'badge-destructive'
 						]">
 							{{ value }}
 						</span>
@@ -125,10 +125,10 @@ const handleBulkAction = ({ action, ids }) => {
 							<button class="btn btn-ghost btn-icon" title="View details">
 								<IconEye :size="16" />
 							</button>
-							<button class="btn btn-ghost btn-icon hover:text-blue-600" title="Edit item">
+							<button class="btn btn-ghost btn-icon hover:text-primary" title="Edit item">
 								<IconPencil :size="16" />
 							</button>
-							<button @click="products = products.filter(p => p.id !== row.id)" class="btn btn-ghost btn-icon hover:text-rose-600" title="Delete item">
+							<button @click="products = products.filter(p => p.id !== row.id)" class="btn btn-ghost btn-icon hover:text-destructive" title="Delete item">
 								<IconTrash :size="16" />
 							</button>
 						</div>

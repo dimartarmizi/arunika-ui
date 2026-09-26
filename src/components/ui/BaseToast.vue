@@ -46,19 +46,19 @@ const defaultIcon = computed(() => {
 	}
 })
 
-const alertVariantClass = computed(() => {
+const toastVariantClass = computed(() => {
 	switch (props.variant) {
 		case 'success':
-			return 'alert-success'
+			return 'toast-item-success'
 		case 'warning':
-			return 'alert-warning'
+			return 'toast-item-warning'
 		case 'error':
-			return 'alert-error'
+			return 'toast-item-destructive'
 		case 'neutral':
-			return 'bg-slate-900 text-white border-slate-800'
+			return 'toast-item-neutral'
 		case 'info':
 		default:
-			return 'alert-info'
+			return 'toast-item-info'
 	}
 })
 
@@ -72,7 +72,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<div :class="['alert shadow-lg min-w-72 max-w-sm', alertVariantClass]" role="status">
+	<div :class="['toast-item min-w-72 max-w-sm', toastVariantClass]" role="status">
 		<slot name="icon">
 			<component :is="defaultIcon" v-if="defaultIcon" :size="20" class="shrink-0" />
 		</slot>
@@ -84,7 +84,7 @@ onMounted(() => {
 			</p>
 		</div>
 
-		<button v-if="dismissible" type="button" @click="$emit('close')" class="p-1 hover:bg-black/10 rounded-lg transition shrink-0 cursor-pointer" aria-label="Dismiss toast">
+		<button v-if="dismissible" type="button" @click="$emit('close')" class="p-1 hover:bg-foreground/10 rounded-lg transition shrink-0 cursor-pointer" aria-label="Dismiss toast">
 			<IconX :size="14" />
 		</button>
 	</div>

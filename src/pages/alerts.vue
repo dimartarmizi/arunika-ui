@@ -12,8 +12,8 @@ const resetAlert = () => {
 	<div class="flex flex-col gap-6">
 		<div class="flex items-center justify-between">
 			<div>
-				<h3 class="text-xl font-bold text-slate-900">Alerts</h3>
-				<p class="text-xs sm:text-sm text-slate-500">Contextual feedback messages for typical user actions.</p>
+				<h3 class="text-xl font-bold text-foreground">Alerts</h3>
+				<p class="text-xs sm:text-sm text-muted-foreground">Contextual feedback messages for typical user actions.</p>
 			</div>
 			<button v-if="!showDismissible" @click="resetAlert" class="btn btn-outline btn-sm">
 				Restore Dismissed Alert
@@ -22,7 +22,7 @@ const resetAlert = () => {
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Basic Variants</h4>
+				<h4 class="font-semibold text-sm text-foreground">Basic Variants</h4>
 			</div>
 			<div class="card-body flex flex-col gap-3">
 				<BaseAlert variant="info">
@@ -45,7 +45,7 @@ const resetAlert = () => {
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Alerts with Titles & Actions</h4>
+				<h4 class="font-semibold text-sm text-foreground">Alerts with Titles & Actions</h4>
 			</div>
 			<div class="card-body flex flex-col gap-4">
 				<BaseAlert v-model="showDismissible" variant="info" title="Information Notice" dismissible>
@@ -69,7 +69,7 @@ const resetAlert = () => {
 				<BaseAlert variant="error" title="Critical Failure">
 					The backup job failed due to insufficient disk space on partition /dev/sda1.
 					<template #actions>
-						<button class="btn btn-sm btn-danger">Retry Job</button>
+						<button class="btn btn-sm btn-destructive">Retry Job</button>
 					</template>
 				</BaseAlert>
 			</div>

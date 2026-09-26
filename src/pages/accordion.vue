@@ -82,14 +82,14 @@ const iconItems = [
 <template>
 	<div class="flex flex-col gap-6">
 		<div>
-			<h3 class="text-xl font-bold text-slate-900">Accordion</h3>
-			<p class="text-xs sm:text-sm text-slate-500">Expandable collapse sections for FAQs, segmented settings, and collapsible content.</p>
+			<h3 class="text-xl font-bold text-foreground">Accordion</h3>
+			<p class="text-xs sm:text-sm text-muted-foreground">Expandable collapse sections for FAQs, segmented settings, and collapsible content.</p>
 		</div>
 
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="font-semibold text-sm text-slate-800">Basic (Single Expand)</h4>
+					<h4 class="font-semibold text-sm text-foreground">Basic (Single Expand)</h4>
 				</div>
 				<div class="card-body">
 					<BaseAccordion :items="faqItems" />
@@ -98,7 +98,7 @@ const iconItems = [
 
 			<div class="card">
 				<div class="card-header">
-					<h4 class="font-semibold text-sm text-slate-800">Multiple Expand (Always Open)</h4>
+					<h4 class="font-semibold text-sm text-foreground">Multiple Expand (Always Open)</h4>
 				</div>
 				<div class="card-body">
 					<BaseAccordion :items="multipleItems" :model-value="['m-1', 'm-2']" multiple />
@@ -108,7 +108,7 @@ const iconItems = [
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="font-semibold text-sm text-slate-800">Separated / Card Style with Icons & Badges</h4>
+				<h4 class="font-semibold text-sm text-foreground">Separated / Card Style with Icons & Badges</h4>
 			</div>
 			<div class="card-body">
 				<BaseAccordion :items="iconItems" variant="separated" multiple />
@@ -118,7 +118,7 @@ const iconItems = [
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="font-semibold text-sm text-slate-800">Flush Variant (Border-free)</h4>
+					<h4 class="font-semibold text-sm text-foreground">Flush Variant (Border-free)</h4>
 				</div>
 				<div class="card-body">
 					<BaseAccordion :items="faqItems" variant="flush" />
@@ -127,30 +127,30 @@ const iconItems = [
 
 			<div class="card">
 				<div class="card-header flex items-center justify-between">
-					<h4 class="font-semibold text-sm text-slate-800">Native HTML5 &lt;details&gt; (Zero JS)</h4>
+					<h4 class="font-semibold text-sm text-foreground">Native HTML5 &lt;details&gt; (Zero JS)</h4>
 				</div>
 				<div class="card-body">
 					<div class="accordion">
 						<details class="accordion-item" open>
 							<summary class="accordion-header group">
 								<div class="flex items-center gap-2">
-									<IconHelpCircle :size="18" class="text-slate-500" />
+									<IconHelpCircle :size="18" class="text-muted-foreground" />
 									<span>Can I use pure HTML without Vue components?</span>
 								</div>
-								<IconChevronDown :size="18" class="accordion-icon text-slate-400 transition-transform duration-200" />
+								<IconChevronDown :size="18" class="accordion-icon text-muted-foreground transition-transform duration-200" />
 							</summary>
 							<div class="accordion-body">
-								Yes. The classes <code class="text-xs bg-slate-100 px-1 py-0.5 rounded text-blue-600">.accordion</code>, <code class="text-xs bg-slate-100 px-1 py-0.5 rounded text-blue-600">.accordion-header</code>, and <code class="text-xs bg-slate-100 px-1 py-0.5 rounded text-blue-600">.accordion-body</code> work natively on HTML5 <code class="text-xs">&lt;details&gt;</code> and <code class="text-xs">&lt;summary&gt;</code> elements with automatic chevron rotation.
+								Yes. The classes <code class="text-xs bg-muted px-1 py-0.5 rounded text-primary">.accordion</code>, <code class="text-xs bg-muted px-1 py-0.5 rounded text-primary">.accordion-header</code>, and <code class="text-xs bg-muted px-1 py-0.5 rounded text-primary">.accordion-body</code> work natively on HTML5 <code class="text-xs">&lt;details&gt;</code> and <code class="text-xs">&lt;summary&gt;</code> elements with automatic chevron rotation.
 							</div>
 						</details>
 
 						<details class="accordion-item">
 							<summary class="accordion-header group">
 								<div class="flex items-center gap-2">
-									<IconHelpCircle :size="18" class="text-slate-500" />
+									<IconHelpCircle :size="18" class="text-muted-foreground" />
 									<span>Does it support browser keyboard navigation?</span>
 								</div>
-								<IconChevronDown :size="18" class="accordion-icon text-slate-400 transition-transform duration-200" />
+								<IconChevronDown :size="18" class="accordion-icon text-muted-foreground transition-transform duration-200" />
 							</summary>
 							<div class="accordion-body">
 								Native HTML5 details element natively supports Tab focus, Space, and Enter key toggling without extra event listeners.

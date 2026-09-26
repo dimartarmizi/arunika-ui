@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import BaseTable from '../components/ui/BaseTable.vue'
 import {
 	IconReceipt,
 	IconShoppingCart,
@@ -24,6 +25,14 @@ const stats = [
 	{ title: 'Active Products', value: '94', change: '+3.5%', isPositive: true, icon: IconPackage },
 ]
 
+const orderColumns = [
+	{ key: 'id', label: 'Order ID' },
+	{ key: 'customer', label: 'Customer' },
+	{ key: 'amount', label: 'Amount' },
+	{ key: 'status', label: 'Status' },
+	{ key: 'action', label: 'Action', align: 'right' }
+]
+
 const orders = ref([
 	{ id: '#ORD-8821', customer: 'Budi Santoso', amount: '$16,500.00', status: 'Completed' },
 	{ id: '#ORD-8820', customer: 'Siti Rahma', amount: '$1,450.00', status: 'Processing' },
@@ -35,13 +44,13 @@ const orders = ref([
 
 <template>
 	<div class="flex flex-col gap-6">
-		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-linear-to-r from-blue-600 to-indigo-700 text-white rounded-2xl p-6 shadow-sm">
+		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-linear-to-r from-primary to-primary-hover text-primary-foreground rounded-2xl p-6 shadow-sm">
 			<div>
 				<h3 class="text-xl sm:text-2xl font-bold">Welcome back, Administrator!</h3>
-				<p class="text-blue-100 text-sm mt-1">Here is a summary of your store's performance and activity today.</p>
+				<p class="text-primary-foreground/80 text-sm mt-1">Here is a summary of your store's performance and activity today.</p>
 			</div>
 			<div class="flex items-center gap-2">
-				<button class="btn bg-white/10 hover:bg-white/20 text-white backdrop-blur-xs">
+				<button class="btn bg-primary-foreground/10 hover:bg-primary-foreground/20 text-primary-foreground backdrop-blur-xs">
 					<IconDownload :size="16" />
 					Download Report
 				</button>
@@ -64,7 +73,7 @@ const orders = ref([
 					<div class="stat-value">{{ st.value }}</div>
 					<span :class="[
 						'badge',
-						st.isPositive ? 'badge-success' : 'badge-danger'
+						st.isPositive ? 'badge-success' : 'badge-destructive'
 					]">
 						<IconArrowUpRight v-if="st.isPositive" :size="14" class="mr-0.5" />
 						<IconArrowDownRight v-else :size="14" class="mr-0.5" />
@@ -77,90 +86,81 @@ const orders = ref([
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 			<div class="lg:col-span-2 card overflow-hidden">
 				<div class="card-header">
-					<h4 class="font-bold text-slate-900 text-sm sm:text-base">Recent Orders</h4>
+					<h4 class="font-bold text-foreground text-sm sm:text-base">Recent Orders</h4>
 				</div>
-				<div class="overflow-x-auto">
-					<table class="table">
-						<thead class="table-thead">
-							<tr>
-								<th class="table-th">Order ID</th>
-								<th class="table-th">Customer</th>
-								<th class="table-th">Amount</th>
-								<th class="table-th">Status</th>
-								<th class="table-th text-right">Action</th>
-							</tr>
-						</thead>
-						<tbody class="divide-y divide-slate-100">
-							<tr v-for="order in orders" :key="order.id" class="table-row">
-								<td class="table-td font-semibold text-blue-600 text-xs">{{ order.id }}</td>
-								<td class="table-td text-slate-700 font-medium">{{ order.customer }}</td>
-								<td class="table-td text-slate-900 font-semibold">{{ order.amount }}</td>
-								<td class="table-td">
-									<span :class="[
-										'badge',
-										order.status === 'Completed' ? 'badge-success' :
-											order.status === 'Processing' ? 'badge-warning' : 'badge-danger'
-									]">
-										{{ order.status }}
-									</span>
-								</td>
-								<td class="table-td text-right">
-									<button class="btn btn-ghost btn-icon">
-										<IconDotsVertical :size="16" />
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<BaseTable :columns="orderColumns" :data="orders">
+					<template #cell(id)="{ value }">
+						<span class="font-semibold text-primary text-xs">{{ value }}</span>
+					</template>
+					<template #cell(customer)="{ value }">
+						<span class="text-muted-foreground font-medium">{{ value }}</span>
+					</template>
+					<template #cell(amount)="{ value }">
+						<span class="text-foreground font-semibold">{{ value }}</span>
+					</template>
+					<template #cell(status)="{ value }">
+						<span :class="[
+							'badge',
+							value === 'Completed' ? 'badge-success' :
+								value === 'Processing' ? 'badge-warning' : 'badge-destructive'
+						]">
+							{{ value }}
+						</span>
+					</template>
+					<template #cell(action)>
+						<button class="btn btn-ghost btn-icon">
+							<IconDotsVertical :size="16" />
+						</button>
+					</template>
+				</BaseTable>
 			</div>
 
 			<div class="card p-5 flex flex-col justify-between">
 				<div>
-					<h4 class="font-bold text-slate-900 text-sm sm:text-base mb-4">System Activity</h4>
+					<h4 class="font-bold text-foreground text-sm sm:text-base mb-4">System Activity</h4>
 					<div class="flex flex-col gap-4">
 						<div class="flex gap-3">
-							<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+							<div class="w-8 h-8 rounded-full bg-success-soft text-success flex items-center justify-center shrink-0">
 								<IconCircleCheck :size="16" />
 							</div>
 							<div>
-								<p class="text-xs font-semibold text-slate-800">Payment Confirmed</p>
-								<p class="text-xs text-slate-500 mt-0.5">Order #ORD-8821 of $16,500.00 was successful.</p>
-								<span class="text-[10px] text-slate-400">10 mins ago</span>
+								<p class="text-xs font-semibold text-foreground">Payment Confirmed</p>
+								<p class="text-xs text-muted-foreground mt-0.5">Order #ORD-8821 of $16,500.00 was successful.</p>
+								<span class="text-[10px] text-muted-foreground">10 mins ago</span>
 							</div>
 						</div>
 
 						<div class="flex gap-3">
-							<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+							<div class="w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center shrink-0">
 								<IconUser :size="16" />
 							</div>
 							<div>
-								<p class="text-xs font-semibold text-slate-800">New User Registered</p>
-								<p class="text-xs text-slate-500 mt-0.5">Budi Santoso created a new account.</p>
-								<span class="text-[10px] text-slate-400">45 mins ago</span>
+								<p class="text-xs font-semibold text-foreground">New User Registered</p>
+								<p class="text-xs text-muted-foreground mt-0.5">Budi Santoso created a new account.</p>
+								<span class="text-[10px] text-muted-foreground">45 mins ago</span>
 							</div>
 						</div>
 
 						<div class="flex gap-3">
-							<div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+							<div class="w-8 h-8 rounded-full bg-warning-soft text-warning flex items-center justify-center shrink-0">
 								<IconPackage :size="16" />
 							</div>
 							<div>
-								<p class="text-xs font-semibold text-slate-800">Low Stock Alert</p>
-								<p class="text-xs text-slate-500 mt-0.5">Dell UltraSharp 27" stock has 12 units remaining.</p>
-								<span class="text-[10px] text-slate-400">2 hours ago</span>
+								<p class="text-xs font-semibold text-foreground">Low Stock Alert</p>
+								<p class="text-xs text-muted-foreground mt-0.5">Dell UltraSharp 27" stock has 12 units remaining.</p>
+								<span class="text-[10px] text-muted-foreground">2 hours ago</span>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-100">
-					<div class="flex items-center justify-between text-xs font-semibold text-slate-700">
+				<div class="mt-6 p-4 rounded-xl bg-background border border-border">
+					<div class="flex items-center justify-between text-xs font-semibold text-muted-foreground">
 						<span>Server Capacity</span>
-						<span class="text-blue-600">68%</span>
+						<span class="text-primary">68%</span>
 					</div>
-					<div class="w-full h-2 bg-slate-200 rounded-full mt-2 overflow-hidden">
-						<div class="h-full bg-blue-600 rounded-full" style="width: 68%"></div>
+					<div class="w-full h-2 bg-muted rounded-full mt-2 overflow-hidden">
+						<div class="h-full bg-primary rounded-full" style="width: 68%"></div>
 					</div>
 				</div>
 			</div>

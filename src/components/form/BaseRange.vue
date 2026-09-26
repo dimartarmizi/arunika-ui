@@ -26,6 +26,6 @@ defineEmits(['update:modelValue'])
 		<label v-if="label" class="form-label">
 			{{ label }}
 		</label>
-		<input type="range" :min="min" :max="max" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" v-bind="$attrs" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3" />
+		<input type="range" :min="min" :max="max" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" v-bind="$attrs" class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary mt-3" />
 	</div>
 </template>

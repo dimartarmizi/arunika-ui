@@ -64,31 +64,31 @@ const feedbackMessage = computed(() => {
 		<label v-if="label" class="form-label flex items-center justify-between">
 			<span>
 				{{ label }}
-				<span v-if="required" class="text-rose-500 font-bold ml-0.5">*</span>
+				<span v-if="required" class="text-destructive font-bold ml-0.5">*</span>
 			</span>
 		</label>
 
 		<label v-if="dropzone" :class="[
 			'flex items-center justify-center gap-3 px-4 py-2.5 border-2 border-dashed rounded-xl transition group h-[42px]',
-			disabled ? 'opacity-50 cursor-not-allowed bg-slate-100 border-slate-200' : 'cursor-pointer',
-			computedState === 'error' ? 'border-rose-400 bg-rose-50/30' : '',
-			computedState === 'success' ? 'border-emerald-400 bg-emerald-50/30' : '',
-			computedState === 'warning' ? 'border-amber-400 bg-amber-50/30' : '',
-			!computedState && !disabled ? 'border-slate-300 hover:border-blue-500 bg-slate-50/50 hover:bg-blue-50/30' : ''
+			disabled ? 'opacity-50 cursor-not-allowed bg-muted border-border' : 'cursor-pointer',
+			computedState === 'error' ? 'border-destructive bg-destructive-soft' : '',
+			computedState === 'success' ? 'border-success bg-success-soft' : '',
+			computedState === 'warning' ? 'border-warning bg-warning-soft' : '',
+			!computedState && !disabled ? 'border-border hover:border-primary bg-background/50 hover:bg-primary-soft' : ''
 		]">
-			<IconUpload :size="18" class="text-slate-400 group-hover:text-blue-600 transition shrink-0" />
-			<span class="text-xs text-slate-600">
-				<span class="font-semibold text-blue-600">Choose a file</span> or drag it here
+			<IconUpload :size="18" class="text-muted-foreground group-hover:text-primary transition shrink-0" />
+			<span class="text-xs text-muted-foreground">
+				<span class="font-semibold text-primary">Choose a file</span> or drag it here
 			</span>
 			<input type="file" :disabled="disabled" class="hidden" @change="$emit('change', $event)" v-bind="$attrs" />
 		</label>
 
 		<input v-else type="file" :disabled="disabled" @change="$emit('change', $event)" v-bind="$attrs" :class="[
-			'w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:cursor-pointer file:transition border rounded-xl bg-slate-50 focus:outline-none cursor-pointer',
-			computedState === 'error' ? 'border-rose-300 bg-rose-50/30' : '',
-			computedState === 'success' ? 'border-emerald-300 bg-emerald-50/30' : '',
-			computedState === 'warning' ? 'border-amber-300 bg-amber-50/30' : '',
-			!computedState ? 'border-slate-200' : '',
+			'w-full text-xs text-muted-foreground file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary-hover file:cursor-pointer file:transition border rounded-xl bg-background focus:outline-none cursor-pointer',
+			computedState === 'error' ? 'border-destructive bg-destructive-soft' : '',
+			computedState === 'success' ? 'border-success bg-success-soft' : '',
+			computedState === 'warning' ? 'border-warning bg-warning-soft' : '',
+			!computedState ? 'border-border' : '',
 			disabled ? 'opacity-50 cursor-not-allowed' : ''
 		]" />
 

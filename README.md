@@ -9,10 +9,11 @@ Arunika uses pure semantic CSS utility classes (`@layer components`) and custom 
 ## ✨ Features
 
 - ⚡ **Vite 6 + Vue 3** (`<script setup>`, Composition API)
-- 🎨 **Tailwind CSS v4** with native CSS nesting and `@layer components`
+- 🎨 **Tailwind CSS v4** with CSS variables (`:root`, `.dark`, `@theme`) and `@layer components`
+- 🌓 **Dark Mode Support** via class strategy (`.dark`) with default light theme and localStorage persistence
 - 🧭 **File-based Routing** powered by `unplugin-vue-router`
 - 🗂️ **Zero Bloat UI Architecture** — no heavy component frameworks (Vuetify, Element Plus, etc.)
-- 🎯 **Semantic Component Utilities** (`.btn`, `.badge`, `.card`, `.accordion`, `.tab`, `.input-*`)
+- 🎯 **Pure Semantic Tokens** (`background`, `foreground`, `card`, `muted`, `border`, `ring`, `primary`, `success`, `warning`, `destructive`, `info`, `sidebar`)
 - 🛡️ **Comprehensive Form Validation States** (`error`, `success`, `warning`, `hint`) across all inputs
 - 🎭 **Smooth CSS Grid Animations** for expandable Accordions and collapsible Sidebar
 - 🪟 **Complete App Shell**: Collapsible sidebar navigation, mobile drawer backdrop, sleek custom scrollbar
@@ -136,17 +137,25 @@ npm run preview
 
 ## 🎨 Styling & Theming
 
-All reusable semantic classes live in `src/style.css` using Tailwind CSS v4 `@layer components`:
+Arunika uses Tailwind CSS v4 CSS variable-based design tokens registered in `@theme`:
+
+```css
+/* Core surface tokens: background, foreground, card, muted, border, ring */
+/* Semantic variant tokens: primary, success, warning, destructive, info */
+/* Sidebar tokens: sidebar, sidebar-foreground, sidebar-border, sidebar-accent */
+```
+
+Reusable semantic component utilities live in `src/style.css` via `@layer components`:
 
 ```css
 /* Example: Custom Button Utility */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-semibold transition cursor-pointer;
+  @apply inline-flex items-center justify-center font-semibold rounded-xl h-10 px-4 text-xs sm:text-sm gap-2 transition duration-150 cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98];
 }
 
 /* Example: Validation States */
 .input-error {
-  @apply border-rose-500 text-rose-900 focus:border-rose-500 focus:ring-rose-500/20;
+  @apply border-destructive focus:border-destructive focus:ring-destructive/20;
 }
 ```
 
